@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.8
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuildQuest.UI", "GuildQuest.UI\GuildQuest.UI.csproj", "{2B0A524F-B027-48BF-A2F0-C445ED52BB20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuildQuest.UI.Tests", "GuildQuest.UI.Tests\GuildQuest.UI.Tests.csproj", "{94236292-FC62-42C8-8296-EFC1177E5480}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2B0A524F-B027-48BF-A2F0-C445ED52BB20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B0A524F-B027-48BF-A2F0-C445ED52BB20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B0A524F-B027-48BF-A2F0-C445ED52BB20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B0A524F-B027-48BF-A2F0-C445ED52BB20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94236292-FC62-42C8-8296-EFC1177E5480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94236292-FC62-42C8-8296-EFC1177E5480}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94236292-FC62-42C8-8296-EFC1177E5480}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94236292-FC62-42C8-8296-EFC1177E5480}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {530692D8-E5BF-4FAD-8622-B22ADDD9C2F1}
+	EndGlobalSection
+EndGlobal

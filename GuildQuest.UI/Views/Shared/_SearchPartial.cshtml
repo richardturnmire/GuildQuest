@@ -1,0 +1,43 @@
+﻿<div class="row searchBar w-100">
+    <form class="form-inline w-100 justify-content-between ">
+        <div class="input-group w-25">
+            <label class="sr-only col-form-label mx-sm-2 mb-0  " for="searchArg">Search for</label>
+            <input type="text" id="searchArg" class="form-control mx-sm-2 mb-2 mb-sm-0 " placeholder="Enter Year, Make or Model" />
+        </div>
+
+        <div class="input-group w-25">
+            <label for="minPrice" class="col-form-label mr-sm-2 mb-0">Price</label>
+            <select class="form-control   mb-2 mb-sm-0 " id="minPrice">
+                <option>No Min</option>
+                <option>10,000</option>
+            </select>
+
+            <label class="sr-only col-form-label  " for="maxPrice">Name</label>
+            <select class="form-control   mb-2 mb-sm-0  " id="maxPrice">
+                <option>No Max</option>
+                <option>15,000</option>
+            </select>
+        </div>
+
+        <div class="input-group w-25">
+            <label for="minYear" class="col-form-label ">Year</label>
+            <select class="form-control  " id="minYear">
+                <option>No Min</option>
+                <option>2000</option>
+            </select>
+
+            <label class="sr-only col-form-label " for="maxYear">Name</label>
+            <select class="form-control  " id="maxYear">
+                <option>No Max</option>
+                <option>2018</option>
+            </select>
+
+         </div>
+
+        <div class="row w-100  justify-content-center">
+            <button type="submit" class="btn btn-primary" id="searchButton">Search</button>
+        </div>
+
+</form>
+   
+</div>

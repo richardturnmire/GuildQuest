@@ -1,0 +1,87 @@
+﻿@using GuildQuest.UI.Models
+@model IList<VehicleViewModel>
+
+
+@foreach (VehicleViewModel vehicle in Model)
+{
+    var imgSource = "../Content/Images/" + @vehicle.VINumber + ".jpg";
+    <div class="card card-outline-warning">
+        <div class="card-block">
+            <div class="row w-100">
+                <div class="col-md-3">
+                    <div class="card-title">@vehicle.YearMakeModel</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <img class="card-image-top " style="height: 300px; width: 100%;" src=@imgSource alt="Image of @vehicle.YearMakeModel">
+                </div>
+                <div class="col">
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="row">
+                                <label for="bodyStyle">Body Style:</label>
+                                <p id="bodyStyle">@vehicle.BodyStyle</p>
+                            </div>
+                            <div class="row">
+                                <label for="transType">Trans:</label>
+                                <p id="transType">@vehicle.TransmissionType</p>
+                            </div>
+                            <div class="row">
+                                <label for="exteriorColor">Color:</label>
+                                <p id="exteriorColor">@vehicle.ExteriorColor</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="row">
+                                <label for="interiorColor">Interior:</label>
+                                <p id="interiorColor">@vehicle.InteriorColor</p>
+                            </div>
+                            <div class="row">
+                                <label for="mileage">Mileage:</label>
+                                <p id="mileage">@vehicle.Mileage</p>
+                            </div>
+                            <div class="row">
+                                <label for="vinNumber">VIN #:</label>
+                                <p id="vinNumber">@vehicle.VINumber</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="row">
+                                <label for="salePrice">Sale Price:</label>
+                                <p id="salePrice">@vehicle.SalesPrice</p>
+                            </div>
+                            <div class="row">
+                                <label for="msrpPrice">MSRP:</label>
+                                <p id="msrpPrice">@vehicle.MSRPrice</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row  w-100 justify-content-end">
+               
+                  @Html.ActionLink(
+                            linkText: "Details",
+                            actionName: "Details",
+                            controllerName: "Inventory",
+                            routeValues: new
+                            {
+                               id = @vehicle.VehicleID
+
+                            },
+                            htmlAttributes: new
+                            {
+                                @class = "btn btn-warning"
+                            }
+                    )
+                
+            </div>
+        </div>
+    </div>
+}
+

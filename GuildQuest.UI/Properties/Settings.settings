@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="GuildQuest.UI.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Twilio_AccountSID" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">ACcacea2e211f6e2898e81d382d28c3415</Value>
+    </Setting>
+    <Setting Name="Twilio_AuthToken" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">2a8844af60dfa744f3da5be748a69f5b</Value>
+    </Setting>
+    <Setting Name="Twilio_Number" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">+15024439696</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

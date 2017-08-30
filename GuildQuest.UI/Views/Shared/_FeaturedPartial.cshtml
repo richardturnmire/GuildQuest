@@ -1,0 +1,35 @@
+﻿@using GuildQuest.UI.Models
+@model IList<VehicleViewModel>
+@{
+    var cnter = 0;
+    var breaker = "";
+}
+
+
+@foreach (var vehicle in Model)
+{
+    var imgSource = "../Content/Images/" + @vehicle.VINumber + ".jpg";
+    var imgAlt = $"Image of {@vehicle.YearMakeModel}";
+    cnter += 1;
+    breaker = cnter % 3 == 0 ? "w-100" : "";
+    <div class="card text-white bg-dark text-center col-4 mr-1 @breaker ">
+        
+            <div class="card-header" style="height: 360px; width: 480px">     
+
+                <img class="card-image-top img-fluid" src=@imgSource alt=@imgAlt>
+            </div>
+         
+        <div class="card-block">
+            <div class="row">
+                <h2 class="card-title mx-auto" style="align-self: center">@vehicle.YearMakeModel</h2>
+            </div>
+        </div>
+        <div class="card-footer align-bottom h-25">
+            
+            <div class="row">
+                <h3 class="card-subtitle mx-auto">@vehicle.SalesPrice</h3>
+            </div>
+        </div>
+    </div>
+}
+

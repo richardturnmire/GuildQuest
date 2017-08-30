@@ -1,0 +1,22 @@
+﻿@using GuildQuest.UI.Models
+@model IList<Special>   
+<div style="background-color: whitesmoke">
+    <div class="container">
+        <div class="row justify-content-center ">
+            <div id="specialsHeader" class="mt-3"><h1><strong>@ViewBag.Message</strong></h1></div>
+        </div>
+       
+        <div class="list-group" id="specialsList">
+@foreach (Special special in Model)
+{
+            <div class="card card-outline-warning">
+                <div class="card-block">
+                    <h2 class="card-title">@special.Special_Title</h2>
+                    <hr />
+                    <p class="card-text">@special.Special_Description</p>
+                </div>
+            </div>
+}
+        </div>
+    </div>
+</div>

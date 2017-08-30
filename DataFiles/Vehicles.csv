@@ -1,0 +1,30 @@
+﻿VIN,Year,MakeModelID,Make,Model,BodyStyleID,Body Style,TransmissionType,Automatic,MSRP,InteriorColorID,Interior,ExteriorColorID,Exterior,Mileage,Salesprice,Sold,Featured,Acura
+4S3BJ6332P6953766,1993,1117,Subaru,Legacy,1,Wagon,2,Manual,18550,1,Black,1,Silver,125000,14324,,1,Acura
+JH4DB1671PS002584,1993,818,Acura,Integra,2,Sedan,1,Automatic,17820,2,Gray,2,Red,243560,13234,,,Audi
+1B3ES56C55D137449,2005,843,Dodge,Neon,2,Sedan,2,Manual,15070,3,Taupe Cloth Interior,3,Bright Silver Metaillic,83466,12342,1,,BMW
+KNAFB121625150469,2002,1094,Kia,Spectra,2,Sedan,1,Automatic,10995,4,Beige Cloth Interior,4,Evergreen,123120,6554,,,Chevrolet
+JN8AZ1MU4CW113789,2012,886,Nissan,Murano,3,Sport Utility,3,CVT,32860,4,Beige Cloth Interior,5,Pearl White,63567,25432,,1,Dodge
+1GNDT13W012105424,2001,394,Chevrolet,Blazer,3,Sport Utility,1,Automatic,26905,4,Beige Cloth Interior,6,Majestic Red Metallic,93261,22456,,,Dodge
+5XYKU4A12BG001739,2011,1089,Kia,Sorento,3,Sport Utility,1,Automatic,24595,5,Black Leather,7,Pacific Blue,45003,21456,1,,Dodge
+JN1BY1AR3BM374797,2011,939,Infiniti,M37,2,Sedan,1,Automatic,48400,6,Java Leather,8,Platinum Granite,56245,35689,,,Ford
+1G8MF35X68Y131819,2008,1199,Saturn,Sky,4,Convertible,2,Manual,29785,5,Black Leather,9,Chili Pepper Red,75369,26896,,1,GMC
+JN8AS1MU0CM120061,2012,932,Infiniti,Fx35,3,Sport Utility,1,Automatic,43450,6,Java Leather,10,Malbec Black,69524,35678,,,Honda
+5J6RE4H48BL023237,2011,530,Honda,CrV,3,Sport Utility,1,Automatic,23645,7,Black Cloth,11,Alabaster Silver,56239,19569,,1,Honda
+2HNYD28377H522352,2007,814,Acura,MDX,3,Sport Utility,1,Automatic,43495,3,Taupe Cloth Interior,12,Steel Blue Metallic,89647,36523,,,Hyundai
+WVWAF93D258002461,2005,979,Volkswagen,Phaeton,2,Sedan,1,Automatic,66950,8,Anthracite Leather,13,Silver Atmosphere,113258,45367,,,Infiniti
+WMWZN3C51BT133317,2011,187,Mini,Cooper,4,Convertible,2,Manual,24850,9,Carbon Black Leather,14,Midnight Black Metallic,89652,19675,,,Infiniti
+5NPEC4ABXDH539433,2013,1061,Hyundai,Sonata,2,Sedan,1,Automatic,25845,10,Gray,15,Blue,65951,22543,1,,Jaguar
+JM3TB2MA5A0235007,2010,510,Mazda,CX-9,3,Sport Utility,1,Automatic,32645,5,Black Leather,16,Copper Red Mica,73652,28795,,,Kia
+3D7UT2CL2BG587350,2011,835,Dodge,Ram-2500,5,Pickup,1,Automatic,44980,11,Dark Slate,17,Bright White,58963,38765,,1,Kia
+WAUYGAFC6CN174200,2012,1175,Audi,A7,6,Hatchback,1,Automatic,59250,5,Black Leather,18,Dakota Gray Metallic,45321,49654,,,KIA
+1FMEU7DE5AUA72472,2010,460,Ford,Explorer,3,Sport Utility,1,Automatic,31200,5,Black Leather,19,White Suede,65963,27890,,,Lexus
+4A3AA46G11E035323,2001,955,Mitsubishi,Galant,2,Sedan,1,Automatic,18407,12,Gray Cloth,20,Dover White Pearl,259654,15432,,,Make
+2HGES26772H566107,2002,528,Honda,Civic,2,Sedan,1,Automatic,17010,12,Gray Cloth,21,Nighthawk Black Pearl,129562,15345,,,Mazda
+SAJWA2GEXBMV00832,2011,15,Jaguar,XJL,2,Sedan,1,Automatic,86650,13,Jet Leather,22,Frost Blue Metallic,63215,78543,,1,Mini
+1GKDT13S852309288,2005,447,GMC,Envoy,3,Sport Utility,1,Automatic,30775,14,Ebony Leather,23,Liquid Silver Metallic,89562,27654,,,Mitsubishi
+JF1GPAD60D1803590,2013,1120,Subaru,Impreza,6,Hatchback,3,CVT,35965,1,Black,25,Black,42358,29950,,,Saturn
+2D4FV47V46H368760,2006,840,Dodge,Magnum,1,Wagon,1,Automatic,26570,16,Dark Slate Gray,3,Bright Silver Metaillic,89541,7990,,,Scion
+KNAFT4A22D5675895,2013,1085,KIA,Forte,2,Sedan,2,Manual,15400,17,Stone Cloth,3,Bright Silver Metaillic,45357,13540,,1,Subaru
+YV1AH852071023377,2007,1018,Volvo,S80,2,Sedan,1,Automatic,47350,8,Anthracite Leather,26,Oyster Gray Metallic,68529,39867,,,Subaru
+JTHFE2C24A2504933,2010,1105,Lexus,IS-350C,4,Convertible,1,Automatic,43940,5,Black Leather,27,Matador Red Mica,55987,19480,,,Volkswagen
+5UXFE83507LZ40758,2007,28,BMW,X5,3,Sport Utility,1,Automatic,54500,4,Beige Cloth Interior,28,Jet Black,84652,16500,,,Volvo

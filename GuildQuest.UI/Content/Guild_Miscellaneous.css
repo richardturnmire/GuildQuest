@@ -1,0 +1,162 @@
+﻿.jumbotron {
+    padding: 0 0 6px 0;
+}
+
+#map {
+    width: 100%;
+    top: 5px;
+    bottom: 0;
+    background-color: blue;
+    position: absolute;
+    float: left;
+}
+
+#specialsList {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: x-large;
+}
+
+    #specialsList .card {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: xx-large;
+        background-color: aliceblue;
+        border: 3px solid black;
+        border-radius: 10px;
+        width: 100%;
+    }
+
+#specialsHeader {
+    margin: 1.5rem 0;
+}
+
+.searchBar {
+    margin: 1.5rem 0;
+    padding: 10px 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: xx-large;
+    background-color: aliceblue;
+    border: 3px solid black;
+    border-radius: 10px;
+    width: 100%;
+}
+
+    /*.searchBar .form-control {
+        width: 100%;
+    }*/
+    .searchBar .form-group {
+        align-items: flex-start;
+    }
+
+    .searchBar label {
+        margin: 0 10px;
+        height: inherit;
+    }
+
+#searchArg {
+    height: 60px;
+    width: 700px;
+    max-width: 700px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: x-large;
+    background-color: white;
+    border: gray solid 1px;
+}
+
+.searchBar select {
+    height: 60px;
+    max-width: 350px;
+    min-width: 150px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: x-large;
+}
+
+#minPrice, #minYear {
+    height: 60px;
+    margin-right: 10px;
+}
+
+#maxPrice, #maxYear {
+    height: 60px;
+    margin-right: 10px;
+}
+
+
+
+#searchButton {
+    width: 200px;
+    max-width: 200px;
+    height: 60px;
+    margin-top: 10px;
+}
+
+address {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: xx-large;
+}
+
+#contactForm {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: xx-large;
+}
+
+    #contactForm input {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: xx-large;
+        max-width: 600px;
+    }
+
+    #contactForm textarea {
+        max-width: 600px;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: xx-large;
+    }
+
+
+
+#inventoryList {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: x-large;
+}
+
+    #inventoryList .card {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: xx-large;
+        background-color: aliceblue;
+        border: 3px solid black;
+        border-radius: 10px;
+        width: 100%;
+    }
+
+    #inventoryList label {
+        width: 200px;
+        height: 60px;
+    }
+
+    #inventoryList a {
+        width: 200px;
+        max-width: 200px;
+        height: 60px;
+        margin-top: 10px;
+        font-family: inherit;
+        font-size: inherit;
+    }
+
+#inventoryHeader {
+    margin: 1.5rem 0;
+}
+
+.vdivide {
+    border-left-width: 1px;
+    border-left-color: black;
+    border-left-style: solid;
+}
+
+   
+
+
+
+
+
+
+
+

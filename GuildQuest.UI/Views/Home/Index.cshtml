@@ -1,0 +1,22 @@
+﻿@using GuildQuest.UI.Models
+@model MainPageViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    @Html.Partial("_CarouselPartial", Model)
+</div>
+
+<div class="lead"><h1 class="larger">Featured Vehicles</h1></div>
+
+<div class="album " id="featured">
+    
+    <div class="row">
+             <div class="container-fluid">
+       
+            @Html.Partial("_FeaturedPartial", Model.Featured)
+       
+             </div>
+    </div>
+</div>

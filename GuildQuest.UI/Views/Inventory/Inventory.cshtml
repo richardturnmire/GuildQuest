@@ -1,0 +1,20 @@
+﻿@using GuildQuest.UI.Models
+@model IList<VehicleViewModel>
+
+<div style="background-color: whitesmoke">
+
+    <div class="container-fluid">
+        <div class="row justify-content-center ">
+            <div class="mt-3"><h1><strong>@ViewBag.Message</strong></h1></div>
+        </div>
+       
+        @Html.Partial("_SearchPartial")
+
+        <div class="row justify-content-center my-3">
+            <div id="inventoryHeader"><h1><strong>Search Results</strong></h1></div>
+        </div>
+        <div class="list-group" id="inventoryList">
+            @Html.Partial("_InventoryPartial", Model)
+        </div>
+    </div>
+</div>
