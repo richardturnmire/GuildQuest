@@ -27,6 +27,7 @@ namespace GuildQuest.UI.Models
         public Nullable<bool> Sold { get; set; }
         public Nullable<bool> Featured { get; set; }
         public short Year { get; set; }
+        public string Description { get; set; }
     
         public virtual BodyStyle BodyStyle { get; set; }
         public virtual ExteriorColor ExteriorColor { get; set; }

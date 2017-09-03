@@ -21,5 +21,6 @@ namespace GuildQuest.UI.Models
         public bool Featured { get; set; }
         public short Year { get; set; }
         public string Status { get; set; }
+        public string Description { get; set; }
     }
 }

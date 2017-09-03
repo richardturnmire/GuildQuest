@@ -133,6 +133,7 @@
           <Property Name="MSRPrice" Type="money" Nullable="false" />
           <Property Name="Sold" Type="bit" />
           <Property Name="Featured" Type="bit" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1024" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -478,6 +479,7 @@
           <NavigationProperty Name="MakeModel" Relationship="Self.FK_Vehicle_MakeModel" FromRole="Vehicle" ToRole="MakeModel" />
           <NavigationProperty Name="TransmissionType" Relationship="Self.FK_Vehicle_TransmissionType" FromRole="Vehicle" ToRole="TransmissionType" />
           <Property Name="Year" Type="Int16" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -772,6 +774,7 @@
           <EntitySetMapping Name="Vehicles">
             <EntityTypeMapping TypeName="GuildCarsModel.Vehicle">
               <MappingFragment StoreEntitySet="Vehicle">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="VehicleID" ColumnName="VehicleID" />
                 <ScalarProperty Name="MakeModelID" ColumnName="MakeModelID" />

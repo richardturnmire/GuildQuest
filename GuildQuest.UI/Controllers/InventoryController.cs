@@ -33,7 +33,25 @@ namespace GuildQuest.UI.Controllers
             {
                 return HttpNotFound();
             }
-            return View(vehicle);
+
+            var vm = new VehicleViewModel()
+            {
+                VehicleID = vehicle.VehicleID,
+                YearMakeModel = $"{vehicle.Year} {vehicle.MakeModel.MakeName} {vehicle.MakeModel.ModelName}",
+                BodyStyle = vehicle.BodyStyle.BodyStyle1,
+                TransmissionType = vehicle.TransmissionType.TransmissionType1,
+                InteriorColor = vehicle.InteriorColor.InteriorColor1,
+                ExteriorColor = vehicle.ExteriorColor.ExteriorColor1,
+                Status = (vehicle.Mileage > 1000 ? "Used" : "New"),
+                Mileage = (vehicle.Mileage > 1000 ? "Used" : "New"),
+                VINumber = vehicle.VINumber,
+                SalesPrice = vehicle.SalesPrice.ToString("C0"),
+                MSRPrice = vehicle.MSRPrice.ToString("C0"),
+                Sold = (vehicle.Sold ?? false),
+                Featured = (vehicle.Featured ?? false),
+                Description = vehicle.Description ?? "No Description"
+            }; 
+            return View(vm);
         }
 
         // GET: Inventory/Create
