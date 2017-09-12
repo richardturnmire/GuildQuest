@@ -2,14 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Formatting;
 using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
 
 namespace GuildQuest.UI.Controllers
 {
     public class HomeController : Controller
     {
-
         public ActionResult Index()
         {
             var vm = new MainPageViewModel();
@@ -37,15 +38,12 @@ namespace GuildQuest.UI.Controllers
                         Sold = (vehicle.Sold ?? false),
                         Featured = (vehicle.Featured ?? false)
                     });
-
                 }
-
             };
 
             return View(vm);
         }
 
-       
         public ActionResult Specials()
         {
             ViewBag.Message = "Specials";
@@ -57,7 +55,6 @@ namespace GuildQuest.UI.Controllers
             };
 
             return View(vm);
-
         }
 
         public ActionResult About()
@@ -67,11 +64,37 @@ namespace GuildQuest.UI.Controllers
             return View();
         }
 
+        [System.Web.Mvc.HttpGet]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
+            var vm = new ContactViewModel();
+            return View(vm);
+        }
+       
+        [System.Web.Mvc.HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Contact(ContactViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var db = new Models.GuildCarsEntities())
+                {
+                    var contact = new Contact()
+                    {
+                        ContactEmail = model.Email,
+                        ContactMessage = model.Message,
+                        ContactName = model.Name,
+                        ContactPhone = model.Phone,
+                        ContactSubject = model.Subject
+                    };
+                    db.Contacts.Add(contact);
+                    db.SaveChanges();
+                }
+                return RedirectToAction("Index");
+            }
 
-            return View();
+            return View(model);
         }
     }
 }

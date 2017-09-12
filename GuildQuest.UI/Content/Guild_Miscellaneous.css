@@ -29,59 +29,45 @@
     margin: 1.5rem 0;
 }
 
-.searchBar {
-    margin: 1.5rem 0;
-    padding: 10px 0;
+#searchBar {
+    margin: 0;
+    
+    padding: 10px 10px;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: xx-large;
+    font-size: x-large;
     background-color: aliceblue;
     border: 3px solid black;
     border-radius: 10px;
     width: 100%;
 }
 
-    /*.searchBar .form-control {
-        width: 100%;
-    }*/
-    .searchBar .form-group {
-        align-items: flex-start;
-    }
+#searchBar label {
+    margin-right: 10px;
+}
 
-    .searchBar label {
-        margin: 0 10px;
-        height: inherit;
-    }
-
-#searchArg {
+#SearchMinPrice, #SearchMaxPrice, #SearchMinYear, #SearchMaxYear {
     height: 60px;
-    width: 700px;
-    max-width: 700px;
+    width: auto;
+    padding: 0 5px;
+    max-width: 200px;
+    min-width: 50px;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: x-large;
     background-color: white;
-    border: gray solid 1px;
+    margin-right: 10px;
 }
 
-.searchBar select {
+#SearchArg {
     height: 60px;
-    max-width: 350px;
-    min-width: 150px;
+    min-width: 200px;
+    max-width: 700px;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: x-large;
+    color: black;
+    background-color: white;
+    border: gray solid 3px;
+    
 }
-
-#minPrice, #minYear {
-    height: 60px;
-    margin-right: 10px;
-}
-
-#maxPrice, #maxYear {
-    height: 60px;
-    margin-right: 10px;
-}
-
-
-
 #searchButton {
     width: 200px;
     max-width: 200px;
@@ -91,24 +77,26 @@
 
 address {
     font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: xx-large;
+    font-size: x-large;
 }
 
 #contactForm {
     font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: xx-large;
+    font-size: large;
 }
 
+#contactForm .form-group {
+    margin-bottom: .25rem;
+}
     #contactForm input {
-        font-family: Georgia, 'Times New Roman', Times, serif;
-        font-size: xx-large;
+        font: inherit;
         max-width: 600px;
     }
 
     #contactForm textarea {
         max-width: 600px;
-        font-family: Georgia, 'Times New Roman', Times, serif;
-        font-size: xx-large;
+        height: auto;
+        font: inherit;
     }
 
 
@@ -119,8 +107,7 @@ address {
 }
 
     #inventoryList .card {
-        font-family: Georgia, 'Times New Roman', Times, serif;
-        font-size: xx-large;
+        font: inherit;
         background-color: aliceblue;
         border: 3px solid black;
         border-radius: 10px;
@@ -128,12 +115,14 @@ address {
     }
 
     #inventoryList label {
-        width: 200px;
+        width: 100%;
+        min-width: 100px;
+        max-width: 150px;
         height: 60px;
         text-align: right;
         margin-right: 5px;
-        font-family: Georgia, 'Times New Roman', Times, serif;
-        font-size: xx-large;
+        font: inherit;
+        
     }
 
     #inventoryList a {
@@ -141,8 +130,8 @@ address {
         max-width: 300px;
         height: 60px;
         margin-top: 10px;
-        font-family: inherit;
-        font-size: inherit;
+        font: inherit;
+         
     }
 
 #inventoryHeader {
@@ -153,14 +142,23 @@ address {
     border-left-width: 1px;
     border-left-color: black;
     border-left-style: solid;
+    margin-right: 1rem;
 }
 
    
+#navbarNav a:focus, a:hover {
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    background-color: lightcyan;
+}
 
 
+.nav-link {background-color: gainsboro}
 
+#navbarNav .active a {
+    background-color: lightgreen;
+    color: black;
+}
 
-
-
-
-
+.active >   a {
+    color: red;
+}

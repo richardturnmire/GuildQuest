@@ -1,43 +1,45 @@
-﻿<div class="row searchBar w-100">
-    <form class="form-inline w-100 justify-content-between ">
-        <div class="input-group w-25">
-            <label class="sr-only col-form-label mx-sm-2 mb-0  " for="searchArg">Search for</label>
-            <input type="text" id="searchArg" class="form-control mx-sm-2 mb-2 mb-sm-0 " placeholder="Enter Year, Make or Model" />
+﻿@using GuildQuest.UI.Models
+@model SearchViewModel
+
+
+<div>
+    @using (Html.BeginForm("SearchInventory", "Inventory", FormMethod.Post,
+                                                            new { enctype = "multipart/form-data", @id = "searchBar", @class = " w-100  justify-content-between " }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <div class="row border-dark justify-content-between ">
+            <div class="col-md-3 col-sm-4 justify-content-start">
+                @Html.LabelFor(model => model.SearchArg, "", new { @class = "sr-only", style = "width=10px;" })
+                @Html.EditorFor(model => model.SearchArg, new { htmlAttributes = new { placeholder = "Enter Make and/or Model" }, @class = "form-control form-control-lg  ", @id = "searchArg", placeholder = "Enter Make and/or Model" })
+                @Html.ValidationMessageFor(model => model.SearchArg, "", new { @class = "text-danger bg-warning" })
+            </div>
+            <div class="col-md-3 col-sm-4 align-content-center">
+                @Html.LabelFor(model => model.SearchMinPrice)
+                @Html.DropDownListFor(model => model.SearchMinPrice, Model.MinPrices, new { @class = "custom-select form-control form-control-lg  mb-2 mr-sm-2 mb-sm-0" })
+                @Html.ValidationMessageFor(model => model.SearchMinPrice, "", new { @class = "text-danger bg-warning" })
+
+                @Html.LabelFor(model => model.SearchMaxPrice, "", new { @class = "sr-only", style = "width=10px;" })
+                @Html.DropDownListFor(model => model.SearchMaxPrice, Model.MaxPrices, new { @class = "custom-select form-control form-control-lg  mb-2 mr-sm-2 mb-sm-0" })
+                @Html.ValidationMessageFor(model => model.SearchMaxPrice, "", new { @class = "text-danger bg-warning" })
+            </div>
+            <div class="col-md-3 col-sm-4 justify-content-end">
+                @Html.LabelFor(model => model.SearchMinYear)
+                @Html.DropDownListFor(model => model.SearchMinYear, Model.MinYears, new { @class = "custom-select form-control form-control-lg  mb-2 mr-sm-2 mb-sm-0" })
+                @Html.ValidationMessageFor(model => model.SearchMinYear, "", new { @class = "text-danger bg-warning" })
+
+                @Html.LabelFor(model => model.SearchMaxYear, "", new { @class = "sr-only", style = "width=10px;" })
+                @Html.DropDownListFor(model => model.SearchMaxYear, Model.MaxYears, new { @class = "custom-select form-control form-control-lg  mb-2 mr-sm-2 mb-sm-0" })
+                @Html.ValidationMessageFor(model => model.SearchArg, "", new { @class = "text-danger bg-warning" })
+            </div>
         </div>
 
-        <div class="input-group w-25">
-            <label for="minPrice" class="col-form-label mr-sm-2 mb-0">Price</label>
-            <select class="form-control   mb-2 mb-sm-0 " id="minPrice">
-                <option>No Min</option>
-                <option>10,000</option>
-            </select>
-
-            <label class="sr-only col-form-label  " for="maxPrice">Name</label>
-            <select class="form-control   mb-2 mb-sm-0  " id="maxPrice">
-                <option>No Max</option>
-                <option>15,000</option>
-            </select>
+        <div class="row">
+            <div class="col-md-2  mx-auto">
+                <button type="submit" class="btn btn-primary mx-auto" id="searchButton">Search</button>
+            </div>
         </div>
 
-        <div class="input-group w-25">
-            <label for="minYear" class="col-form-label ">Year</label>
-            <select class="form-control  " id="minYear">
-                <option>No Min</option>
-                <option>2000</option>
-            </select>
-
-            <label class="sr-only col-form-label " for="maxYear">Name</label>
-            <select class="form-control  " id="maxYear">
-                <option>No Max</option>
-                <option>2018</option>
-            </select>
-
-         </div>
-
-        <div class="row w-100  justify-content-center">
-            <button type="submit" class="btn btn-primary" id="searchButton">Search</button>
-        </div>
-
-</form>
-   
+    }
 </div>

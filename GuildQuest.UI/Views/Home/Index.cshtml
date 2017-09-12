@@ -8,15 +8,15 @@
     @Html.Partial("_CarouselPartial", Model)
 </div>
 
-<div class="lead"><h1 class="larger">Featured Vehicles</h1></div>
+<div class="row h1 lead text-lg-left">Featured Vehicles</div>
 
 <div class="album " id="featured">
-    
+
     <div class="row">
-             <div class="container-fluid">
-       
+        <div class="container-fluid">
+
             @Html.Partial("_FeaturedPartial", Model.Featured)
-       
-             </div>
+
+        </div>
     </div>
 </div>

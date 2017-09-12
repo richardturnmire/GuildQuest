@@ -1,4 +1,7 @@
-﻿@{
+﻿@using GuildQuest.UI.Models
+@model ContactViewModel
+
+@{
     ViewBag.Title = "Contact Us";
 }
 
@@ -9,6 +12,7 @@
 
         </div>
     </div>
+
     <div class="row" style="font-size: 18px; display: flex;">
         <div class="col-md-2">
             <p></p>
@@ -18,45 +22,69 @@
                 <abbr title="Phone">P:</abbr>
                 502.555.1234
             </address>
-
-
         </div>
-        <div class="col-md-4" id="contactForm">
-            <form>
+
+        <div class="col-md-5" id="contactForm">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
                 <div class="form-group">
-                    <div class="form-group">
-                        <label for="inputName" class="col-form-label">Name</label>
+                    <div class="form-group row">
+                        <div class="col-sm-2">
+                            @Html.LabelFor(model => model.Name)
+                        </div>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputName" placeholder="Name">
+                            @Html.EditorFor(model => model.Name)
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger bg-warning" })
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="inputEmail3" class="col-form-label">Email</label>
+                    <div class="form-group row">
+                        <div class="col-sm-2">
+                            @Html.LabelFor(model => model.Email)
+                        </div>
                         <div class="col-sm-10">
-                            <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                            @Html.EditorFor(model => model.Email)
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="inputPhone" class="col-form-label">Phone</label>
+                    <div class="form-group row">
+                        <div class="col-sm-2">
+                            @Html.LabelFor(model => model.Phone)
+                        </div>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputPhone" placeholder="(000) 555-1234">
+                            @Html.EditorFor(model => model.Phone)
+                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="inputMessage" class="col-form-label">Message</label>
+                    <div class="form-group row mb-4">
+                        <div class="col-sm-2">
+                            @Html.LabelFor(model => model.Subject)
+                        </div>
                         <div class="col-sm-10">
-                            <textarea class="form-control" id="inputMessage" placeholder="Message" rows="10">
-                            </textarea>
+                            @Html.EditorFor(model => model.Subject)
+                            @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-2">
+                            @Html.LabelFor(model => model.Message)
+                        </div>
+                        <div class="col-sm-10">
+                            @Html.TextAreaFor(model => model.Message, 9, 8, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+            }
         </div>
+
         <div class="col-md-4">
             <div id="map" class="col" style="width: 100%; min-height: 300px;  background-color: grey;">
 
@@ -65,30 +93,33 @@
     </div>
 </div>
 
+@section Scripts {
 
-<script>
-    function initMap() {
-        var guild = { lat: 38.2539326, lng: -85.7485225 };
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 16,
-            center: guild
-        });
-        var marker = new google.maps.Marker({
-            position: guild,
-            map: map
-        });
-        var circle = new google.maps.Circle({
-            strokeColor: '#FF0000',
-            strokeOpacity: 0.8,
-            strokeWeight: 2,
-            fillColor: '#FF0000',
-            fillOpacity: 0.15,
-            map: map,
-            center: guild,
-            radius: 200
-        });
-    }
-</script>
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8iKImK2HWvzu_EVjO48a0m6t3qXuLW80&callback=initMap">
-</script>
+    <script>
+        function initMap() {
+            var guild = { lat: 38.2539326, lng: -85.7485225 };
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 16,
+                center: guild
+            });
+            var marker = new google.maps.Marker({
+                position: guild,
+                map: map
+            });
+            var circle = new google.maps.Circle({
+                strokeColor: '#FF0000',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#FF0000',
+                fillOpacity: 0.15,
+                map: map,
+                center: guild,
+                radius: 200
+            });
+        }
+
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8iKImK2HWvzu_EVjO48a0m6t3qXuLW80&callback=initMap">
+    </script>
+}

@@ -8,6 +8,32 @@ body {
   color: #5a5a5a;
 }
 
+.jumbotron {
+    padding-top: 6rem;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    background-color: #fff;
+}
+
+.jumbotron .carousel {
+    margin-bottom: 0;
+}
+
+.jumbotron .carousel-item {
+    height: 300px;
+}
+
+.jumbotron p:last-child {
+    margin-bottom: 0;
+}
+
+.jumbotron-heading {
+    font-weight: 300;
+}
+
+.jumbotron .container {
+    max-width: 40rem;
+}
 
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */

@@ -18,93 +18,154 @@
                 <img class="card-image-top " style="height: 300px; width: 100%;" src=@imgSource alt="Image of @Model.YearMakeModel">
             </div>
             <div class="col">
-                <div class="row">
-
+                <div class="row   w-100">
                     <div class="col-md-4">
                         <div class="row">
-                            <label for="bodyStyle">Body Style:</label>
-                            <p id="bodyStyle">@Model.BodyStyle</p>
-                        </div>
-                        <div class="row">
-                            <label for="transType">Trans:</label>
-                            <p id="transType">@Model.TransmissionType</p>
-                        </div>
-                        <div class="row">
-                            <label for="exteriorColor">Color:</label>
-                            <p id="exteriorColor">@Model.ExteriorColor</p>
+                            <div class="col-md-6">
+                                <label for="bodyStyle">Body Style:</label>
+                            </div>
+                            <div class="col">
+                                <div id="bodyStyle">@Model.BodyStyle</div>
+                            </div>
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="row">
-                            <label for="interiorColor">Interior:</label>
-                            <p id="interiorColor">@Model.InteriorColor</p>
-                        </div>
-                        <div class="row">
-                            <label for="mileage">Mileage:</label>
-                            <p id="mileage">@Model.Mileage</p>
-                        </div>
-                        <div class="row">
-                            <label for="vinNumber">VIN #:</label>
-                            <p id="vinNumber">@Model.VINumber</p>
+                            <div class="col-md-4">
+                                <label for="interiorColor">Interior:</label>
+                            </div>
+                            <div class="col">
+                                <div id="interiorColor">@Model.InteriorColor</div>
+                            </div>
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="row">
-                            <label for="salePrice">Sale Price:</label>
-                            <p id="salePrice">@Model.SalesPrice</p>
+                            <div class="col-md-7">
+                                <label for="salePrice">Sale Price:</label>
+                            </div>
+                            <div class="col align-content-end">
+                                <div id="salePrice">@Model.SalesPrice</div>
+                            </div>
                         </div>
-                        <div class="row">
-                            <label for="msrpPrice">MSRP:</label>
-                            <p id="msrpPrice">@Model.MSRPrice</p>
-                        </div>
-
                     </div>
                 </div>
-                @if (!String.IsNullOrEmpty(@Model.Description))
-            {
-                    <div class="row  w-100 justify-content-start">
+
+                <div class="row   w-100">
+                    <div class="col-md-4">
                         <div class="row">
-                            <label for="description">Description:</label>
-                            <p id="description">@Model.Description</p>
+                            <div class="col-md-6">
+                                <label for="transType">Trans:</label>
+                            </div>
+                            <div class="col">
+                                <div id="transType">@Model.TransmissionType</div>
+                            </div>
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="mileage">Mileage:</label>
+                            </div>
+                            <div class="col">
+                                <div id="mileage">@Model.Mileage</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <label for="msrpPrice">MSRP:</label>
+                            </div>
+                            <div class="col align-content-end">
+                                <div id="msrpPrice">@Model.MSRPrice</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row   w-100">
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="exteriorColor">Color:</label>
+                            </div>
+                            <div class="col">
+                                <div id="exteriorColor">@Model.ExteriorColor</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="vinNumber">VIN #:</label>
+                            </div>
+                            <div class="col">
+                                <div id="vinNumber">@Model.VINumber</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="row">
+
+                        </div>
+                    </div>
+                </div>
+
+
+                @if (!String.IsNullOrEmpty(@Model.Description))
+                {
+                    <div class="row  w-100 ">
+                        <div class="col-md-12">
+                            <div class="row">
+                            <div class="col-md-2">
+                                <label for="description">Description:</label>
+                            </div>
+                            <div class="col justify-content-start">
+                                <div id="description">@Model.Description</div>
+                                </div>  
+                            </div>
+                            </div>
+                    </div>
+
                 }
                 <div class="row  w-100 justify-content-end">
                     @if (ViewBag.Source == "Detail")
                     {
                         @Html.ActionLink(
-                        linkText: "Contact Us",
-                        actionName: "Contact",
-                        controllerName: "Home",
-                        routeValues: new
-                        {
-                            id = @Model.VehicleID
+                                            linkText: "Contact Us",
+                                            actionName: "Contact",
+                                            controllerName: "Home",
+                                            routeValues: new
+                                            {
+                                                id = @Model.VehicleID
 
-                        },
-                        htmlAttributes: new
-                        {
-                            @class = "btn btn-warning"
-                        }
-                        )
+                                            },
+                                            htmlAttributes: new
+                                            {
+                                                @class = "btn btn-primary"
+                                            }
+                                            )
                     }
                     else
                     {
                         @Html.ActionLink(
-                        linkText: "Details",
-                        actionName: "Details",
-                        controllerName: "Inventory",
-                        routeValues: new
-                        {
-                            id = @Model.VehicleID
+                                            linkText: "Details",
+                                            actionName: "Details",
+                                            controllerName: "Inventory",
+                                            routeValues: new
+                                            {
+                                                id = @Model.VehicleID
 
-                        },
-                        htmlAttributes: new
-                        {
-                            @class = "btn btn-warning"
-                        }
-                        )
+                                            },
+                                            htmlAttributes: new
+                                            {
+                                                @class = "btn btn-warning"
+                                            }
+                                            )
 
 
                     }

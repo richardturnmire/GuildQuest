@@ -1,5 +1,5 @@
 ﻿@using GuildQuest.UI.Models
-@model IList<VehicleViewModel>
+@model InventoryViewModel
 
 <div style="background-color: whitesmoke">
 
@@ -8,13 +8,13 @@
             <div class="mt-3"><h1><strong>@ViewBag.Message</strong></h1></div>
         </div>
 
-        @Html.Partial("_SearchPartial")
+        @Html.Partial("_SearchPartial", Model.SearchParms)
 
         <div class="row justify-content-center my-3">
             <div id="inventoryHeader"><h1><strong>Search Results</strong></h1></div>
         </div>
         <div class="list-group" id="inventoryList">
-            @foreach (VehicleViewModel vehicle in Model)
+            @foreach (VehicleViewModel vehicle in Model.Vehicles)
             {
                 <div class="card-outline-warning">
                     @Html.Partial("_InventoryPartial", @vehicle)

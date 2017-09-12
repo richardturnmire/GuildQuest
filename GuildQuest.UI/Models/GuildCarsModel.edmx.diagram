@@ -28,6 +28,7 @@
         <AssociationConnector Association="GuildCarsModel.FK_Vehicle_MakeModel" ManuallyRouted="false" />
         <AssociationConnector Association="GuildCarsModel.FK_Vehicle_TransmissionType" ManuallyRouted="false" />
         <AssociationConnector Association="GuildCarsModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="GuildCarsModel.Contact" Width="1.5" PointX="7.75" PointY="4.125" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

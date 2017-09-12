@@ -38,5 +38,6 @@ namespace GuildQuest.UI.Models
         public virtual DbSet<Special> Specials { get; set; }
         public virtual DbSet<TransmissionType> TransmissionTypes { get; set; }
         public virtual DbSet<Vehicle> Vehicles { get; set; }
+        public virtual DbSet<Contact> Contacts { get; set; }
     }
 }
