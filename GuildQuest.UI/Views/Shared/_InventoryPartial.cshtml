@@ -15,7 +15,7 @@
         </div>
         <div class="row">
             <div class="col-md-3">
-                <img class="card-image-top " style="height: 300px; width: 100%;" src=@imgSource alt="Image of @Model.YearMakeModel">
+                <img class="card-image-top img-thumbnail" style="height: 300px; width: 100%;" src=@imgSource alt="Image of @Model.YearMakeModel">
             </div>
             <div class="col">
                 <div class="row   w-100">
@@ -121,17 +121,18 @@
                     <div class="row  w-100 ">
                         <div class="col-md-12">
                             <div class="row">
-                            <div class="col-md-2">
-                                <label for="description">Description:</label>
+                                <div class="col-md-2">
+                                    <label for="description">Description:</label>
+                                </div>
+                                <div class="col justify-content-start">
+                                    <div id="description">@Model.Description</div>
+                                </div>
                             </div>
-                            <div class="col justify-content-start">
-                                <div id="description">@Model.Description</div>
-                                </div>  
-                            </div>
-                            </div>
+                        </div>
                     </div>
 
-                }
+                }  
+
                 <div class="row  w-100 justify-content-end">
                     @if (ViewBag.Source == "Detail")
                     {
@@ -152,7 +153,26 @@
                     }
                     else
                     {
-                        @Html.ActionLink(
+                        if (ViewBag.Source == "Admin")
+                        {
+                            @Html.ActionLink(
+                                linkText: "Edit",
+                                actionName: "EditVehicle",
+                                controllerName: "Admin",
+                                routeValues: new
+                                    {
+                                        id = @Model.VehicleID
+
+                                    },
+                                htmlAttributes: new
+                                    {
+                                        @class = "btn btn-primary"
+                                    }
+                            )
+                        }
+                        else
+                        {
+                            @Html.ActionLink(
                                             linkText: "Details",
                                             actionName: "Details",
                                             controllerName: "Inventory",
@@ -167,7 +187,7 @@
                                             }
                                             )
 
-
+                        }
                     }
                 </div>
             </div>

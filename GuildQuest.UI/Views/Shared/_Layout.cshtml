@@ -35,21 +35,20 @@
                     </li>
                     <li class="nav-item">
                         @Html.ActionLink("Specials", "Specials", new { controller = "Home" }, new { id="Specials", @class = "nav-link vdivide" })
-                    </li>
-                   
-                    @if (Request.IsAuthenticated)
-                    {
-                        <li class="nav-item">
-                            @Html.ActionLink("Sales", "Sales", "Home", new { id="Sales", @class = "nav-link vdivide" })
-                        </li>
-                        <li class="nav-item">
-                            @Html.ActionLink("Admin", "Admin", "Home", new { id="Admin", @class = "nav-link vdivide" })
-                        </li>
-                    }
-
+                    </li> 
                     <li class="nav-item">
                         @Html.ActionLink("Contact", "Contact", new { controller = "Home" }, new {id="Contact",  @class = "nav-link vdivide" })
                     </li>
+                   
+                    @if (!Request.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("Sales", "Sales", new { controller = "Sales" }, new { id="Sales", @class = "nav-link vdivide" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Admin", "Vehicles", new { controller = "Admin" }, new { id="Admin", @class = "nav-link vdivide" })
+                        </li>
+                    }
 
                 </ul>
 
