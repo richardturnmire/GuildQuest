@@ -1,155 +1,253 @@
-﻿@model GuildQuest.UI.Models.Vehicle
+﻿@using System.Runtime.Remoting.Messaging
+@using System.Web.UI.WebControls
+@model GuildQuest.UI.Models.VehicleViewModel
 
 @{
     ViewBag.Title = "Edit";
 
     var imgSource = @Url.Content("~/Content/Images/" + @Model.VINumber + ".jpg");
-    var imgAlt    = @Url.Content("~/Content/Images/540x360.png");
+    var imgAlt = @Url.Content("~/Content/Images/540x360.png");
     var tmpSource = @Url.Content("~/Content/Images/Temp_" + @Model.VINumber + ".jpg");
-
 }
 
 <h2>Edit Vehicle</h2>
 
-
-@using (Html.BeginForm())
+@using (Html.BeginForm(null, null, FormMethod.Post, htmlAttributes: new { @class = "form-horizontal     ", @id = "editVehicleForm" }))
 {
     @Html.AntiForgeryToken()
- 
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.VehicleID)
-        <div class="row">
-            <div class="form-group col">
-                @Html.LabelFor(model => model.MakeModelID, "MakeModelID", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("MakeModelID", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.MakeModelID, "", new { @class = "text-danger" })
-                </div>
-            </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.VehicleID)
 
-            <div class="form-group col">
-                @Html.LabelFor(model => model.BodyStyleID, "BodyStyleID", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("BodyStyleID", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.BodyStyleID, "", new { @class = "text-danger" })
+    <hr />
+    <div class="form-inline align-content-md-end">
+        <div class="col-6">
+            <div class="row">
+                <div class="col-4">
+                    @Html.LabelFor(model => model.MakeId, "Make", htmlAttributes: new { @class = "form-control-label text-right ml-auto" })
                 </div>
+                <div class="col-6">
+                    @Html.DropDownList("MakeId", null, htmlAttributes: new { @class = "form-control" })
+                </div>
+                @Html.ValidationMessageFor(model => model.MakeId, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="row">
-            <div class="form-group col">
-                @Html.LabelFor(model => model.TransmissionTypeID, "TransmissionTypeID", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("TransmissionTypeID", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.TransmissionTypeID, "", new { @class = "text-danger" })
+        <div class="col-6">
+            <div class="row">
+                <div class="col-4">
+                    @Html.LabelFor(model => model.ModelId, "Model", htmlAttributes: new { @class = "form-control-label" })
                 </div>
-            </div>
-
-            <div class="form-group col">
-                @Html.LabelFor(model => model.InteriorColorID, "InteriorColorID", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("InteriorColorID", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.InteriorColorID, "", new { @class = "text-danger" })
+                <div class="col-6">
+                    @Html.DropDownList("ModelId", null, htmlAttributes: new { @class = "form-control" })
                 </div>
+                @Html.ValidationMessageFor(model => model.ModelId, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="row">
-            <div class="form-group col">
-                @Html.LabelFor(model => model.ExteriorColorID, "ExteriorColorID", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("ExteriorColorID", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.ExteriorColorID, "", new { @class = "text-danger" })
-                </div>
-            </div>
+    </div>
 
-            <div class="form-group col">
-                @Html.LabelFor(model => model.Mileage, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Mileage, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Mileage, "", new { @class = "text-danger" })
+    <div class="form-inline">
+        <div class="col-6">
+            <div class="row">
+                <div class="col-4">
+                    @Html.LabelFor(model => model.Year, "Year :", htmlAttributes: new { @class = "form-control-label" })
                 </div>
-            </div>
-        </div>
-        <div class="row">
-
-            <div class="form-group col">
-                @Html.LabelFor(model => model.VINumber, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.VINumber, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.VINumber, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group col">
-                @Html.LabelFor(model => model.SalesPrice, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.SalesPrice, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.SalesPrice, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col">
-                @Html.LabelFor(model => model.MSRPrice, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.MSRPrice, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.MSRPrice, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group col">
-                @Html.LabelFor(model => model.Sold, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.Sold)
-                        @Html.ValidationMessageFor(model => model.Sold, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col">
-                @Html.LabelFor(model => model.Featured, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.Featured)
-                        @Html.ValidationMessageFor(model => model.Featured, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group col">
-                @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                <div class="col-3">
                     @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
                 </div>
+                @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="row">
-            <div class="form-group col">
-                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+        <div class="col-6">
+            <div class="row">
+                <div class="col-4 text-right">
+                    @Html.LabelFor(model => model.VINumber, "VIN", htmlAttributes: new { @class = "form-control-label" })
+                </div>
+                <div class="col-6">
+                    @Html.EditorFor(model => model.VINumber, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                @Html.ValidationMessageFor(model => model.VINumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline">
+        <div class="col-6">
+            <div class="row">
+                <div class="col-4">
+                    @Html.LabelFor(model => model.BodyStyleID, "Body Style", htmlAttributes: new { @class = "form-control-label" })
+                </div>
+                <div class="col-6">
+                    @Html.DropDownList("BodyStyleID", null, htmlAttributes: new { @class = "form-control" })
+                </div>
+                @Html.ValidationMessageFor(model => model.BodyStyleID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="row">
+                <div class="col-4">
+                    @Html.LabelFor(model => model.TransmissionTypeID, "Transmission Type", htmlAttributes: new { @class = "form-control-label" })
+                </div>
+                <div class="col-6">
+                    @Html.DropDownList("TransmissionTypeID", null, htmlAttributes: new { @class = "form-control" })
+                </div>
+                @Html.ValidationMessageFor(model => model.TransmissionTypeID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline">
+        <div class="col-6">
+            <div class="row">
+                <div class="col-4">
+                    @Html.LabelFor(model => model.ExteriorColorID, "Exterior Color", htmlAttributes: new { @class = "form-control-label" })
+                </div>
+                <div class="col-6">
+                    @Html.DropDownList("ExteriorColorID", null, htmlAttributes: new { @class = "form-control" })
+                </div>
+                @Html.ValidationMessageFor(model => model.ExteriorColorID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="row">
+                <div class="col-4">
+                    @Html.LabelFor(model => model.SalesPrice, "Sale Price", htmlAttributes: new { @class = "form-control-label" })
+
+                </div>
+                <div class="col-3">
+                    @Html.EditorFor(model => model.SalesPrice, new { htmlAttributes = new { @class = "form-control text-right pr-1" } })
+                </div>
+                @Html.ValidationMessageFor(model => model.SalesPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline">
+        <div class="col-6">
+            <div class="row">
+                <div class="col-4">
+                    @Html.LabelFor(model => model.InteriorColorID, "Interior Color", htmlAttributes: new { @class = "form-control-label" })
+                </div>
+                <div class="col-6">
+                    @Html.DropDownList("InteriorColorID", null, htmlAttributes: new { @class = "form-control" })
+                </div>
+                @Html.ValidationMessageFor(model => model.InteriorColorID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="row">
+                <div class="col-4">
+                    @Html.LabelFor(model => model.MSRPrice, "MSRP", htmlAttributes: new { @class = "form-control-label" })
+                </div>
+                <div class="col-3">
+                    @Html.EditorFor(model => model.MSRPrice, new { htmlAttributes = new { @class = "form-control text-right pr-1" } })
+                </div>
+                @Html.ValidationMessageFor(model => model.MSRPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline">
+        <div class="col-6">
+            <div class="row">
+                <div class="col-4">
+                    @Html.LabelFor(model => model.Sold, "Sold?", htmlAttributes: new { @class = "form-control-label" })
+                </div>
+                <div class="col-6">
+                    @Html.CheckBoxFor(model => model.Sold, new { @class = "squaredTwo" })
+                </div>
+                @Html.ValidationMessageFor(model => model.Sold, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="row">
+                <div class="col-4">
+                    @Html.LabelFor(model => model.Mileage, "Mileage", htmlAttributes: new { @class = "form-control-label" })
+                </div>
+                <div class="col-3">
+                    @Html.EditorFor(model => model.Mileage, new { htmlAttributes = new { @class = "form-control text-right pr-1" } })
+                </div>
+                @Html.ValidationMessageFor(model => model.Mileage, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="form-inline ">
+        <div class="col-10">
+            <div class="row">
+                <div class="col-4">
+                    @Html.LabelFor(model => model.Description, "Description", htmlAttributes: new { @class = "form-control-label float-left", @id = "labelDescription" })
+                </div>
+                <div class="col-8">
+
+                    @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control float-right " }, rows = 10, cols = 80 })
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>  
-        <div class="row">   
-            <div class="col-md-3">
-                <img class="img-fluid img-thumbnail" src=@imgSource alt=@imgAlt>  
+
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="row">
+        <div class="col-md-3" id="origImage">
+            <img class="img-fluid img-thumbnail" src=@imgSource alt=@imgAlt>
+        </div>
+    </div>
+
+        <!-- Button trigger modal -->
+        <u>
+            <a class=" hm-indigo-light btn-lg" data-toggle="modal" data-target="#replaceImage">
+                Replace image
+            </a>
+        </u>
+
+        <!-- Select replacement image -->
+        <div class="modal fade" id="replaceImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <!--Content-->
+                <div class="modal-content">
+                    <form name="imageForm1" method="post" enctype="multipart/form-data" action="api/UpdateImage">
+                        <!--Header-->
+                        <div class="modal-header">
+                            <h4 class="modal-title w-100" id="myModalLabel">Select new Image for @Model.VINumber</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <!--Body-->
+                        <div class="modal-body">
+                            <div class="form-group col">
+                                <div class="col-md-10">
+                                    <input type="file" id="fileupload" accept="image/*" />
+                                </div>
+                            </div>
+                            <div class="col" id="newImage">
+
+                            </div>
+                        </div>
+                        <!--Footer-->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="saveButton">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+                <!--/.Content-->
             </div>
-        </div>  
+        </div>
+
         <div class="row">
-            <div class="form-group col">
-                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                  <input type="file" id="fileupload"/>
+            <div class="form-group col-md-12">
+                <div class=" float-left">
+                    @Html.CheckBoxFor(model => model.Featured, new { @class = "squaredTwo" })
+                    @Html.LabelFor(model => model.Featured, "Feature this  vehicle?", new { @id = "labelFeatured" })
+                    @Html.ValidationMessageFor(model => model.Featured, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div> 
+        </div>
+
         <div class="row justify-content-start">
             @Html.ActionLink(
                 linkText: "Delete",
@@ -180,13 +278,160 @@
                 }
                 )
         </div>
-    </div>
+
 }
 
 <div>
-  
+
 </div>
 
 @section Scripts {
+    <script>
+        document.getElementById('fileupload').addEventListener('change', function () {
+            for (var i = 0; i < this.files.length; i++) {
+                var file = this.files[i];
+                // This code is only for demo ...
+                console.group("File " + i);
+                console.log("name : " + file.name);
+                console.log("size : " + file.size);
+                console.log("type : " + file.type);
+                console.log("date : " + file.lastModified);
+
+                console.groupEnd();
+                previewImage(file);
+            }
+        }, false);
+
+        document.getElementById('saveButton').addEventListener('click', function () {
+            var firstDivContent = document.getElementById('newImage');
+            var secondDivContent = document.getElementById('origImage');
+
+            secondDivContent.innerHTML = firstDivContent.innerHTML;
+            $('#replaceImage').modal('hide');
+
+            var galleryId = "newImage";
+
+            var gallery = document.getElementById(galleryId);
+
+            while (gallery.firstChild) {
+                gallery.removeChild(gallery.firstChild);
+            }
+
+        }, false);
+
+       
+      
+
+        function previewImage(file) {
+            var galleryId = "newImage";
+
+            var gallery = document.getElementById(galleryId);
+
+            while (gallery.firstChild) {
+                gallery.removeChild(gallery.firstChild);
+            }
+
+            var imageType = /image.*/;
+
+            if (!file.type.match(imageType)) {
+                throw "File Type must be an image";
+            }
+
+            var img = document.createElement("img");
+            img.file = file;
+            img.classList.add('img-fluid'); // Add the class thumbnail to the created div
+            img.classList.add('img-thumbnail');
+
+            gallery.appendChild(img);
+
+            // Using FileReader to display the image content
+            var reader = new FileReader();
+            reader.onload = (function (aImg) { return function (e) { aImg.src = e.target.result; }; })(img);
+            reader.readAsDataURL(file);
+        }
+
+    </script> 
+    <script type="text/javascript">
+        $(document).ready(function () {
+           
+
+            // Dropdown list change event.
+            $('#MakeId').change(function() {
+                $make = $('#MakeId').val();
+                $models = $('#ModelId');
+                //$.getJSON('/home/GetProducts', { intCatID: $('#category').val() }, function (data) {
+                //    $.each(data, function () {
+                //        $('#product').append('<option value=' + 
+                //            this.ProductID + '>' + this.ProductName + '</option>');
+                //    });
+                $.getJSON('/API/GetModelsByMakeId/' + $make)
+                    .done(function(result) {
+                        var items = [];
+
+                        $models.empty()
+                            .append($('<option />',
+                                {
+                                    value: '',
+
+                                    text: "select",
+                                    selected: true,
+                                    disabled: true
+                                }));
+
+                        $.each(result,
+                            function(index, item) {
+                                items.push('<option value="' + item.value + '">' + item.text + '</option>');
+                            });
+                        $models.html(items.join(''));
+                    })
+                    .fail(function(jqXHR) { console.log(jqXHR.responseText) });
+            });
+        });
+
+    </script>
+
+    <script>
+        $(function(){ 
+           
+       
+            var $models = $('#ModelId');
+            var $make = $('#MakeId');
+
+            function getModelsByMakeId() {
+                $.getJSON('/API/GetModelsByMake?Id=' + $make.val())
+                    .done(function(result) {
+                        var items = [];
+
+                        $models.empty()
+                            .append($('<option />',
+                                {
+                                    value: '',
+                                    text: "select",
+                                    selected: true,
+                                    disabled: true
+                                }));
+
+                        $.each(result,
+                            function(index, item) {
+                                items.push('<option value="' + item.value + '">' + item.text + '</option>');
+                            });
+                        $models.html(items.join(''));
+                    })
+                    .fail(function(jqXHR) { console.log(jqXHR.responseText) });
+            }
+        });
+   
+           
+      
+    </script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/0.11.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Description'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
     @Scripts.Render("~/bundles/jqueryval")
 }
+

@@ -24,8 +24,8 @@ namespace GuildQuest.UI.Models
         public string VINumber { get; set; }
         public decimal SalesPrice { get; set; }
         public decimal MSRPrice { get; set; }
-        public Nullable<bool> Sold { get; set; }
-        public Nullable<bool> Featured { get; set; }
+        public bool Sold { get; set; }
+        public bool Featured { get; set; }
         public short Year { get; set; }
         public string Description { get; set; }
     

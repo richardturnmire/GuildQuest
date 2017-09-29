@@ -35,8 +35,8 @@ namespace GuildQuest.UI.Controllers
                         VINumber = vehicle.VINumber,
                         SalesPrice = vehicle.SalesPrice.ToString("C0"),
                         MSRPrice = vehicle.MSRPrice.ToString("C0"),
-                        Sold = (vehicle.Sold ?? false),
-                        Featured = (vehicle.Featured ?? false)
+                        Sold = vehicle.Sold,
+                        Featured = vehicle.Featured
                     });
                 }
             };

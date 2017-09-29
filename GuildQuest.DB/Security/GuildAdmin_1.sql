@@ -1,0 +1,3 @@
+﻿CREATE LOGIN [GuildAdmin]
+    WITH PASSWORD = N'cjvksqoX#RzcgsOhhi@PfcyjmsFT7_&#$!~<o%anrcAEmtzF', SID = 0x5FE06685BDFF59468902CF69413A2DE0, DEFAULT_LANGUAGE = [us_english], CHECK_POLICY = OFF;
+

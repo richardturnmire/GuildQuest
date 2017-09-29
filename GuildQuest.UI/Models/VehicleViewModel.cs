@@ -22,5 +22,14 @@ namespace GuildQuest.UI.Models
         public short Year { get; set; }
         public string Status { get; set; }
         public string Description { get; set; }
+
+        public int MakeId { get; set; }
+        public int ModelId { get; set; }
+        public int MakeModelId { get; set; }
+        public int BodyStyleID { get; set; }
+        public int TransmissionTypeID { get; set; }
+        public int InteriorColorID { get; set; }
+        public int ExteriorColorID { get; set; }
+
     }
 }

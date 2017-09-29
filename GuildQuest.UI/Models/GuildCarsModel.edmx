@@ -143,8 +143,8 @@
           <Property Name="VINumber" Type="char" MaxLength="17" Nullable="false" />
           <Property Name="SalesPrice" Type="money" Nullable="false" />
           <Property Name="MSRPrice" Type="money" Nullable="false" />
-          <Property Name="Sold" Type="bit" />
-          <Property Name="Featured" Type="bit" />
+          <Property Name="Sold" Type="bit" Nullable="false" />
+          <Property Name="Featured" Type="bit" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="1024" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -484,8 +484,8 @@
           <Property Name="VINumber" Type="String" MaxLength="17" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="SalesPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="MSRPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="Sold" Type="Boolean" />
-          <Property Name="Featured" Type="Boolean" />
+          <Property Name="Sold" Type="Boolean" Nullable="false" />
+          <Property Name="Featured" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="BodyStyle" Relationship="Self.FK_Vehicle_BodyStyle" FromRole="Vehicle" ToRole="BodyStyle" />
           <NavigationProperty Name="ExteriorColor" Relationship="Self.FK_Vehicle_ExteriorColor" FromRole="Vehicle" ToRole="ExteriorColor" />
           <NavigationProperty Name="InteriorColor" Relationship="Self.FK_Vehicle_InteriorColor" FromRole="Vehicle" ToRole="InteriorColor" />
