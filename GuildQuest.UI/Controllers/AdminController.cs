@@ -83,8 +83,20 @@ namespace GuildQuest.UI.Controllers
             ViewBag.MakeModelID = new SelectList(db.MakeModels, "MakeModelID", "MakeName");
             ViewBag.TransmissionTypeID = new SelectList(db.TransmissionTypes, "TransmissionTypeID", "TransmissionType1");
             ViewBag.MakeId = new SelectList(db.Makes.OrderBy(d => d.Make_Name), "MakeId", "Make_Name");
+            ViewBag.ModelIds = new SelectList(db.MakeModels.Take(10), "ModelId", "ModelName");
 
-            return View(new VehicleViewModel());
+            var vm = new VehicleViewModel()
+            {
+                MakeId = -1,
+                ModelId = -1,
+                MakeModelId = -1,
+                BodyStyleID = -1,
+                TransmissionTypeID = -1,
+                InteriorColorID = -1,
+                ExteriorColorID = -1
+            };
+          
+            return View(vm);
         }
 
         // POST: Admin/Create
@@ -108,8 +120,9 @@ namespace GuildQuest.UI.Controllers
             ViewBag.MakeModelID = new SelectList(db.MakeModels, "MakeModelID", "MakeName" );
             ViewBag.TransmissionTypeID = new SelectList(db.TransmissionTypes, "TransmissionTypeID", "TransmissionType1" );
             ViewBag.MakeId = new SelectList(db.Makes.OrderBy(d => d.Make_Name), "MakeId", "Make_Name" );
-            // ViewBag.ModelId = new SelectList(db.MakeModels.Where(d => d.MakeID == vehicle.MakeModel.MakeID).OrderBy(d => d.ModelName), "ModelId", "ModelName", vehicle.MakeModel.ModelID); return View(vehicle);
-            return View();
+            ViewBag.ModelIds = new SelectList(db.MakeModels.Take(10), "ModelId", "ModelName");
+            return View(vehicle);
+           
         }
 
         // GET: Admin/Edit/5
@@ -155,7 +168,7 @@ namespace GuildQuest.UI.Controllers
             ViewBag.MakeModelID = new SelectList(db.MakeModels, "MakeModelID", "MakeName", vehicle.MakeModelID);
             ViewBag.TransmissionTypeID = new SelectList(db.TransmissionTypes, "TransmissionTypeID", "TransmissionType1", vehicle.TransmissionTypeID);
             ViewBag.MakeId = new SelectList(db.Makes.OrderBy(d=>d.Make_Name), "MakeId", "Make_Name", vehicle.MakeModel.MakeID);
-            ViewBag.ModelId = new SelectList(db.MakeModels.Where(d => d.MakeID == vehicle.MakeModel.MakeID).OrderBy(d=>d.ModelName), "ModelId", "ModelName", vehicle.MakeModel.ModelID);
+            ViewBag.ModelId = new SelectList(db.MakeModels.Where(d => d.MakeID == vehicle.MakeModel.MakeID).OrderBy(d=>d.ModelName), "ModelId", "ModelName");
             return View(vm);
         }
 

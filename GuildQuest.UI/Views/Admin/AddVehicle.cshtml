@@ -15,30 +15,6 @@
      
 
     <hr />
-    <div class="form-inline align-content-md-end">
-        <div class="col-6">
-            <div class="row">
-                <div class="col-4">
-                    @Html.LabelFor(model => model.MakeId, "Make", htmlAttributes: new { @class = "form-control-label text-right ml-auto" })
-                </div>
-                <div class="col-6">
-                    @Html.DropDownList("MakeId", null, htmlAttributes: new { @class = "form-control" })
-                </div>
-                @Html.ValidationMessageFor(model => model.MakeId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="col-6">
-            <div class="row">
-                <div class="col-4">
-                    @Html.LabelFor(model => model.ModelId, "Model", htmlAttributes: new { @class = "form-control-label" })
-                </div>
-                <div class="col-6">
-                    @Html.DropDownList("ModelId", null, htmlAttributes: new { @class = "form-control" })
-                </div>
-                @Html.ValidationMessageFor(model => model.ModelId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
 
     <div class="form-inline">
         <div class="col-6">
@@ -65,6 +41,32 @@
         </div>
     </div>
 
+    <div class="form-inline align-content-md-end">
+        <div class="col-6">
+            <div class="row">
+                <div class="col-4">
+                    @Html.LabelFor(model => model.MakeId, "Make", htmlAttributes: new { @class = "form-control-label text-right ml-auto" })
+                </div>
+                <div class="col-6">
+                    @Html.DropDownList("MakeId", null, string.Empty, htmlAttributes: new { @class = "form-control" })
+                </div>
+                @Html.ValidationMessageFor(model => model.MakeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="row">
+                <div class="col-4">
+                    @Html.LabelFor(model => model.ModelId, "Model", htmlAttributes: new { @class = "form-control-label" })
+                </div>
+                <div class="col-6">
+                    @Html.DropDownList("ModelIds", null, string.Empty, htmlAttributes: new { @class = "form-control" })
+                </div>
+                @Html.ValidationMessageFor(model => model.ModelId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+   
     <div class="form-inline">
         <div class="col-6">
             <div class="row">
@@ -72,7 +74,7 @@
                     @Html.LabelFor(model => model.BodyStyleID, "Body Style", htmlAttributes: new { @class = "form-control-label" })
                 </div>
                 <div class="col-6">
-                    @Html.DropDownList("BodyStyleID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownList("BodyStyleID", null, string.Empty, htmlAttributes: new { @class = "form-control" })
                 </div>
                 @Html.ValidationMessageFor(model => model.BodyStyleID, "", new { @class = "text-danger" })
             </div>
@@ -83,7 +85,7 @@
                     @Html.LabelFor(model => model.TransmissionTypeID, "Transmission Type", htmlAttributes: new { @class = "form-control-label" })
                 </div>
                 <div class="col-6">
-                    @Html.DropDownList("TransmissionTypeID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownList("TransmissionTypeID", null, string.Empty, htmlAttributes: new { @class = "form-control" })
                 </div>
                 @Html.ValidationMessageFor(model => model.TransmissionTypeID, "", new { @class = "text-danger" })
             </div>
@@ -97,7 +99,7 @@
                     @Html.LabelFor(model => model.ExteriorColorID, "Exterior Color", htmlAttributes: new { @class = "form-control-label" })
                 </div>
                 <div class="col-6">
-                    @Html.DropDownList("ExteriorColorID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownList("ExteriorColorID", null, string.Empty, htmlAttributes: new { @class = "form-control" })
                 </div>
                 @Html.ValidationMessageFor(model => model.ExteriorColorID, "", new { @class = "text-danger" })
             </div>
@@ -123,7 +125,7 @@
                     @Html.LabelFor(model => model.InteriorColorID, "Interior Color", htmlAttributes: new { @class = "form-control-label" })
                 </div>
                 <div class="col-6">
-                    @Html.DropDownList("InteriorColorID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownList("InteriorColorID", null, string.Empty, htmlAttributes: new { @class = "form-control" })
                 </div>
                 @Html.ValidationMessageFor(model => model.InteriorColorID, "", new { @class = "text-danger" })
             </div>
@@ -145,12 +147,12 @@
         <div class="col-6">
             <div class="row">
                 <div class="col-4">
-                    @Html.LabelFor(model => model.Sold, "Sold?", htmlAttributes: new { @class = "form-control-label" })
+                    @Html.LabelFor(model => model.InteriorColorID, "Interior Color", htmlAttributes: new { @class = "form-control-label" })
                 </div>
                 <div class="col-6">
-                    @Html.CheckBoxFor(model => model.Sold, new { @class = "squaredTwo" })
+                    @Html.DropDownList("InteriorColorID", null, string.Empty, htmlAttributes: new { @class = "form-control" })
                 </div>
-                @Html.ValidationMessageFor(model => model.Sold, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.InteriorColorID, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="col-6">
@@ -195,7 +197,7 @@
         <!-- Button trigger modal -->
     <u>
         <a class=" hm-indigo-light btn-lg" data-toggle="modal" data-target="#replaceImage">
-            Replace image
+            Add image
         </a>
     </u>
 
@@ -234,31 +236,9 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="form-group col-md-12">
-                <div class=" float-left">
-                    @Html.CheckBoxFor(model => model.Featured, new { @class = "squaredTwo" })
-                    @Html.LabelFor(model => model.Featured, "Feature this  vehicle?", new { @id = "labelFeatured" })
-                    @Html.ValidationMessageFor(model => model.Featured, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
+       
         <div class="row justify-content-start">
-            @Html.ActionLink(
-                linkText: "Delete",
-                actionName: "DeleteVehicle",
-                controllerName: "Admin",
-                routeValues: new
-                {
-                    id = @Model.VehicleID
-
-                },
-                htmlAttributes: new
-                {
-                    @class = "btn btn-danger hm-blue-light red "
-                }
-                )
+            
             @Html.ActionLink(
                 linkText: "Save",
                 actionName: "EditVehicle",
