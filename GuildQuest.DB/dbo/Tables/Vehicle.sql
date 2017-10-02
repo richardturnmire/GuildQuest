@@ -13,6 +13,7 @@
     [Sold]               BIT             NOT NULL,
     [Featured]           BIT             NOT NULL,
     [Description]        NVARCHAR (1024) NULL,
+    [Type] SMALLINT NOT NULL DEFAULT 0, 
     CONSTRAINT [PK_Vehicle] PRIMARY KEY CLUSTERED ([VehicleID] ASC),
     CONSTRAINT [FK_Vehicle_BodyStyle] FOREIGN KEY ([BodyStyleID]) REFERENCES [dbo].[BodyStyle] ([BodyStyleID]),
     CONSTRAINT [FK_Vehicle_ExteriorColor] FOREIGN KEY ([ExteriorColorID]) REFERENCES [dbo].[ExteriorColor] ([ExteriorColorID]),
