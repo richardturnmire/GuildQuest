@@ -76,13 +76,22 @@
     
     <script>
         $(document).ready(function () {
+            var pager = new Guild.Pager();
+            
+                pager.paragraphsPerPage = 5; // set amount elements per page
+                pager.pagingContainer = $('#inventoryList'); // set of main container
+                pager.paragraphs = $('.card', pager.pagingContainer); // set of required containers
+                pager.showPage(1);
+          
             var loc = window.location.href; // grabbing the url
             var filename = loc.substr(loc.lastIndexOf('/') + 1);
-            console.log("filename " + filename);
-            if(filename.localeCompare("") === 0)
-                $("#Index").addClass("active");
-            else
-                $("#" + filename).addClass("active");
+            if (filename.length > 0) {
+                console.log("filename " + filename);
+                if (filename.localeCompare("") === 0)
+                    $("#Index").addClass("active");
+                else
+                    $("#" + filename).addClass("active");
+            }
 
         });
     </script>

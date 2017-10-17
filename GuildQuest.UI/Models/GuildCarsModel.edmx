@@ -132,7 +132,7 @@
           <Key>
             <PropertyRef Name="VehicleID" />
           </Key>
-          <Property Name="VehicleID" Type="int" Nullable="false" />
+          <Property Name="VehicleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Year" Type="smallint" Nullable="false" />
           <Property Name="MakeModelID" Type="int" Nullable="false" />
           <Property Name="BodyStyleID" Type="int" Nullable="false" />
@@ -146,6 +146,7 @@
           <Property Name="Sold" Type="bit" Nullable="false" />
           <Property Name="Featured" Type="bit" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="1024" />
+          <Property Name="Type" Type="smallint" Nullable="false" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -493,6 +494,7 @@
           <NavigationProperty Name="TransmissionType" Relationship="Self.FK_Vehicle_TransmissionType" FromRole="Vehicle" ToRole="TransmissionType" />
           <Property Name="Year" Type="Int16" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int16" Nullable="false" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -800,6 +802,7 @@
           <EntitySetMapping Name="Vehicles">
             <EntityTypeMapping TypeName="GuildCarsModel.Vehicle">
               <MappingFragment StoreEntitySet="Vehicle">
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="VehicleID" ColumnName="VehicleID" />

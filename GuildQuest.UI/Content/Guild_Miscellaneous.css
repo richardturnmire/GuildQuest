@@ -285,3 +285,37 @@ address {
  .ck-editor__main {
     background-color: whitesmoke;
 }
+
+ .fancybox-image-wrap {
+     width: 80%;
+     height: 80%;
+     background-color: red;
+
+ }
+
+/*#content p {
+    text-indent: 20px;
+    text-align: justify;
+}
+
+#pagingControls ul {
+    display: inline;
+    padding-left: 0.5em
+}
+
+#pagingControls li {
+    display: inline;
+    padding: 0 0.5em
+}*/
+.pagination .page-item {
+    font-size: x-large;
+    border: 2px ridge red; 
+}
+
+.pagination .page-link {
+    background-color: lightcyan;
+    font-size: 1.2rem;
+    border: .1rem;
+    -webkit-transition: all .3s linear;
+    transition: all .3s linear;
+}

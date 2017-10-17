@@ -8,7 +8,7 @@
     <h2>Add Vehicle</h2>
 </p>
 
-@using (Html.BeginForm(null, null, FormMethod.Post, htmlAttributes: new { @class = "form-horizontal", @id = "editVehicleForm" }))
+@using (Html.BeginForm("AddVehicle", "Admin", FormMethod.Post, htmlAttributes: new { enctype = "multipart/form-data", @class = "form-horizontal", @id = "editVehicleForm" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -59,7 +59,7 @@
                     @Html.LabelFor(model => model.ModelId, "Model", htmlAttributes: new { @class = "form-control-label" })
                 </div>
                 <div class="col-6">
-                    @Html.DropDownList("ModelIds", null, string.Empty, htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownList("ModelId", null, string.Empty, htmlAttributes: new { @class = "form-control" })
                 </div>
                 @Html.ValidationMessageFor(model => model.ModelId, "", new { @class = "text-danger" })
             </div>
@@ -144,7 +144,7 @@
     </div>
 
     <div class="form-inline">
-        <div class="col-6">
+        @*<div class="col-6">
             <div class="row">
                 <div class="col-4">
                     @Html.LabelFor(model => model.InteriorColorID, "Interior Color", htmlAttributes: new { @class = "form-control-label" })
@@ -154,7 +154,7 @@
                 </div>
                 @Html.ValidationMessageFor(model => model.InteriorColorID, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
         <div class="col-6">
             <div class="row">
                 <div class="col-4">
@@ -189,81 +189,24 @@
     <hr />
 
     <div class="row">
+        <input type="file" id="FileUpload" name="FileUpload" accept="image/*" />
+    </div>
+    <div class="row">
         <div class="col-md-3" id="origImage">
-            <img class="img-fluid img-thumbnail" src=@imgAlt >
+            <img class="img-fluid img-thumbnail" src=@imgAlt>
         </div>
     </div>
-
-        <!-- Button trigger modal -->
-    <u>
-        <a class=" hm-indigo-light btn-lg" data-toggle="modal" data-target="#replaceImage">
-            Add image
-        </a>
-    </u>
-
-        <!-- Select replacement image -->
-        <div class="modal fade" id="replaceImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <!--Content-->
-                <div class="modal-content">
-                    <form name="imageForm1" method="post" enctype="multipart/form-data" action="api/UpdateImage">
-                        <!--Header-->
-                        <div class="modal-header">
-                            <h4 class="modal-title w-100" id="myModalLabel">Select new Image for @Model.VINumber</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <!--Body-->
-                        <div class="modal-body">
-                            <div class="form-group col">
-                                <div class="col-md-10">
-                                    <input type="file" id="fileupload" accept="image/*" />
-                                </div>
-                            </div>
-                            <div class="col" id="newImage">
-
-                            </div>
-                        </div>
-                        <!--Footer-->
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" id="saveButton">Save changes</button>
-                        </div>
-                    </form>
-                </div>
-                <!--/.Content-->
-            </div>
-        </div>
-
-       
-        <div class="row justify-content-start">
-            
-            @Html.ActionLink(
-                linkText: "Save",
-                actionName: "EditVehicle",
-                controllerName: "Admin",
-                routeValues: new
-                {
-                    id = @Model.VehicleID
-
-                },
-                htmlAttributes: new
-                {
-                    @class = "btn btn-primary hm-green-light  "
-                }
-                )
-        </div>
+    <div class="row my-3">
+        <input type="submit" value="Save">
+    </div>
 
 }
 
-<div>
-
-</div>
+    
 
 @section Scripts {
     <script>
-        document.getElementById('fileupload').addEventListener('change', function () {
+        document.getElementById('FileUpload').addEventListener('change', function () {
             for (var i = 0; i < this.files.length; i++) {
                 var file = this.files[i];
                 // This code is only for demo ...
@@ -278,28 +221,9 @@
             }
         }, false);
 
-        document.getElementById('saveButton').addEventListener('click', function () {
-            var firstDivContent = document.getElementById('newImage');
-            var secondDivContent = document.getElementById('origImage');
-
-            secondDivContent.innerHTML = firstDivContent.innerHTML;
-            $('#replaceImage').modal('hide');
-
-            var galleryId = "newImage";
-
-            var gallery = document.getElementById(galleryId);
-
-            while (gallery.firstChild) {
-                gallery.removeChild(gallery.firstChild);
-            }
-
-        }, false);
-
-
-
-
+       
         function previewImage(file) {
-            var galleryId = "newImage";
+            var galleryId = "origImage";
 
             var gallery = document.getElementById(galleryId);
 
@@ -335,11 +259,7 @@
             $('#MakeId').change(function() {
                 $make = $('#MakeId').val();
                 $models = $('#ModelId');
-                //$.getJSON('/home/GetProducts', { intCatID: $('#category').val() }, function (data) {
-                //    $.each(data, function () {
-                //        $('#product').append('<option value=' +
-                //            this.ProductID + '>' + this.ProductName + '</option>');
-                //    });
+                
                 $.getJSON('/API/GetModelsByMakeId/' + $make)
                     .done(function(result) {
                         var items = [];
@@ -400,7 +320,8 @@
 
 
     </script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/0.11.0/classic/ckeditor.js"></script>
+   
+<script src="https://cdn.ckeditor.com/ckeditor5/1.0.0-alpha.1/classic/ckeditor.js"></script>
     <script>
         ClassicEditor
             .create(document.querySelector('#Description'))

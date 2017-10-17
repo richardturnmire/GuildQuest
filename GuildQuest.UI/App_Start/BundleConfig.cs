@@ -25,18 +25,16 @@ namespace GuildQuest.UI
                     "~/Scripts/bootstrap.min.js",
                     "~/Scripts/mdb.min.js",
                     "~/Scripts/respond*",
-                    "~/Scripts/Guild*"
+                    "~/Scripts/Guild_Script.js",
+                    "~/Scripts/jquery.fancybox.min.js"
                      ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-               
                     "~/Content/bootstrap.min.css",
                     "~/Content/mdb.min.css",
                     "~/Content/Guild*",
-                    
                     "~/Content/style.css",
-                    "~/Content/site.css"
-                   
+                    "~/Content/jquery.fancybox.min.css"
                     ));
         }
     }

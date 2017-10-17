@@ -43,8 +43,8 @@ namespace GuildQuest.UI.Controllers
                 TransmissionType = vehicle.TransmissionType.TransmissionType1,
                 InteriorColor = vehicle.InteriorColor.InteriorColor1,
                 ExteriorColor = vehicle.ExteriorColor.ExteriorColor1,
-                Status = (vehicle.Mileage > 1000 ? "Used" : "New"),
-                Mileage = (vehicle.Mileage > 1000 ? "Used" : "New"),
+                Status = (vehicle.Type == 0 ? "Used" : "New"),
+                Mileage = (vehicle.Type == 0 ? "Used" : "New"),
                 VINumber = vehicle.VINumber,
                 SalesPrice = vehicle.SalesPrice.ToString("C0"),
                 MSRPrice = vehicle.MSRPrice.ToString("C0"),
@@ -70,7 +70,7 @@ namespace GuildQuest.UI.Controllers
 
             using (var db = new Models.GuildCarsEntities())
             {
-                var vehicles = db.Vehicles.Where(v => v.Mileage <= 1000).ToList();
+                var vehicles = db.Vehicles.Where(v => v.Type == 1).ToList();
                 foreach (Vehicle vehicle in vehicles)
                 {
                     vm.Vehicles.Add(new VehicleViewModel()
@@ -81,8 +81,8 @@ namespace GuildQuest.UI.Controllers
                         TransmissionType = vehicle.TransmissionType.TransmissionType1,
                         InteriorColor = vehicle.InteriorColor.InteriorColor1,
                         ExteriorColor = vehicle.ExteriorColor.ExteriorColor1,
-                        Status = (vehicle.Mileage > 1000 ? "Used" : "New"),
-                        Mileage = (vehicle.Mileage > 1000 ? "Used" : "New"),
+                        Status = (vehicle.Type == 0 ? "Used" : "New"),
+                        Mileage = (vehicle.Type == 0 ? "Used" : "New"),
                         VINumber = vehicle.VINumber,
                         SalesPrice = vehicle.SalesPrice.ToString("C0"),
                         MSRPrice = vehicle.MSRPrice.ToString("C0"),
@@ -119,10 +119,10 @@ namespace GuildQuest.UI.Controllers
                     {
                             
                         case SearchTypeEnum.New:
-                            vehicles = db.Vehicles.Where(v => v.Mileage <= 1000).ToList();
+                            vehicles = db.Vehicles.Where(v => v.Type == 1).ToList();
                             break;
                         case SearchTypeEnum.Used:
-                            vehicles = db.Vehicles.Where(v => v.Mileage > 1000).ToList();
+                            vehicles = db.Vehicles.Where(v => v.Type == 0).ToList();
                             break;
                         default:
                             Console.WriteLine("Invalid selection. Please select 1, 2, or 3.");
@@ -139,8 +139,8 @@ namespace GuildQuest.UI.Controllers
                             TransmissionType = vehicle.TransmissionType.TransmissionType1,
                             InteriorColor = vehicle.InteriorColor.InteriorColor1,
                             ExteriorColor = vehicle.ExteriorColor.ExteriorColor1,
-                            Status = (vehicle.Mileage > 1000 ? "Used" : "New"),
-                            Mileage = (vehicle.Mileage > 1000 ? "Used" : "New"),
+                            Status = (vehicle.Type == 0 ? "Used" : "New"),
+                            Mileage = (vehicle.Type == 0 ? "Used" : "New"),
                             VINumber = vehicle.VINumber,
                             SalesPrice = vehicle.SalesPrice.ToString("C0"),
                             MSRPrice = vehicle.MSRPrice.ToString("C0"),
@@ -163,8 +163,6 @@ namespace GuildQuest.UI.Controllers
                         break;
                 }
 
-                
-
             }
 
             return View(model);
@@ -184,7 +182,7 @@ namespace GuildQuest.UI.Controllers
 
             using (var db = new Models.GuildCarsEntities())
             {
-                var vehicles = db.Vehicles.Where(v => v.Mileage > 1000).ToList();
+                var vehicles = db.Vehicles.Where(v => v.Type == 0).ToList();
                 foreach (Vehicle vehicle in vehicles)
                 {
                     vm.Vehicles.Add(new VehicleViewModel()
@@ -195,8 +193,8 @@ namespace GuildQuest.UI.Controllers
                         TransmissionType = vehicle.TransmissionType.TransmissionType1,
                         InteriorColor = vehicle.InteriorColor.InteriorColor1,
                         ExteriorColor = vehicle.ExteriorColor.ExteriorColor1,
-                        Status = (vehicle.Mileage > 1000 ? "Used" : "New"),
-                        Mileage = (vehicle.Mileage > 1000 ? "Used" : "New"),
+                        Status = (vehicle.Type == 0 ? "Used" : "New"),
+                        Mileage = (vehicle.Type == 0 ? "Used" : "New"),
                         VINumber = vehicle.VINumber,
                         SalesPrice = vehicle.SalesPrice.ToString("C0"),
                         MSRPrice = vehicle.MSRPrice.ToString("C0"),

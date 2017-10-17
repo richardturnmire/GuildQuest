@@ -13,13 +13,19 @@
         <div class="row justify-content-center my-3">
             <div id="inventoryHeader"><h1><strong>Search Results</strong></h1></div>
         </div>
+        <nav class="pagingControls">
+
+        </nav>
         <div class="list-group" id="inventoryList">
             @foreach (VehicleViewModel vehicle in Model.Vehicles)
             {
-                <div class="card-outline-warning">
-                    @Html.Partial("_InventoryPartial", @vehicle)
-                </div>
+            <div class="card-outline-warning">
+                @Html.Partial("_InventoryPartial", @vehicle)
+            </div>
             }
         </div>
+        <nav class="pagingControls">
+
+        </nav>
     </div>
 </div>

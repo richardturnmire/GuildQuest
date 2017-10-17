@@ -5,9 +5,9 @@
 @{
     ViewBag.Title = "Edit";
 
-    var imgSource = @Url.Content("~/Content/Images/" + @Model.VINumber + ".jpg");
+    var imgSource = @Url.Content("~/Content/Images/" + @Model.VINumber.Trim() + ".jpg");
     var imgAlt = @Url.Content("~/Content/Images/540x360.png");
-    var tmpSource = @Url.Content("~/Content/Images/Temp_" + @Model.VINumber + ".jpg");
+    
 }
 
 <h2>Edit Vehicle</h2>

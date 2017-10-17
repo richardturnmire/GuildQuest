@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace GuildQuest.UI.Models
 {
@@ -21,7 +23,11 @@ namespace GuildQuest.UI.Models
         public bool Featured { get; set; }
         public short Year { get; set; }
         public string Status { get; set; }
+
+        [DataType(DataType.MultilineText), AllowHtml]
         public string Description { get; set; }
+        public HttpPostedFileBase FileUpload { get; set; }
+
 
         public int MakeId { get; set; }
         public int ModelId { get; set; }

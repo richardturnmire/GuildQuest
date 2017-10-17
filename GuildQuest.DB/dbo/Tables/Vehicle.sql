@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[Vehicle] (
-    [VehicleID]          INT             NOT NULL,
+    [VehicleID]          INT             NOT NULL IDENTITY(1,1),
     [Year]               SMALLINT        NOT NULL,
     [MakeModelID]        INT             NOT NULL,
     [BodyStyleID]        INT             NOT NULL,
@@ -14,7 +14,7 @@
     [Featured]           BIT             NOT NULL,
     [Description]        NVARCHAR (1024) NULL,
     [Type] SMALLINT NOT NULL DEFAULT 0, 
-    CONSTRAINT [PK_Vehicle] PRIMARY KEY CLUSTERED ([VehicleID] ASC),
+    CONSTRAINT [PK_Vehicle] PRIMARY KEY CLUSTERED ([VehicleID] ASC ),
     CONSTRAINT [FK_Vehicle_BodyStyle] FOREIGN KEY ([BodyStyleID]) REFERENCES [dbo].[BodyStyle] ([BodyStyleID]),
     CONSTRAINT [FK_Vehicle_ExteriorColor] FOREIGN KEY ([ExteriorColorID]) REFERENCES [dbo].[ExteriorColor] ([ExteriorColorID]),
     CONSTRAINT [FK_Vehicle_InteriorColor] FOREIGN KEY ([InteriorColorID]) REFERENCES [dbo].[InteriorColor] ([InteriorColorID]),

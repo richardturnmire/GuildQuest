@@ -2,20 +2,24 @@
 @model VehicleViewModel
 
 @{
-    var imgSource = @Url.Content("~/Content/Images/" + @Model.VINumber + ".jpg");
+    var imgSource = @Url.Content("~/Content/Images/" + @Model.VINumber.Trim() + ".jpg");
 }
-<div class="card">
+<div class="card view overlay hm-green-slight">
+    <span class="border border-info"></span>
+
     <div class="card-block">
         <div class="row w-100">
-            <div class="col-md-3">
-                <div class="card-title mx-auto">
+            <div class="col-md">
+                <div class="card-title mx-auto h2-responsive">
                     @Model.YearMakeModel
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3">
-                <img class="card-image-top img-thumbnail" style="height: 300px; width: 100%;" src=@imgSource alt="Image of @Model.YearMakeModel">
+            <div class="col-md-3 " href>
+                <a href=@imgSource data-fancybox="images" data-width="2048" data-height="1365" data-options='{"toolbar" : "false", "smallBtn" : "true"}'>
+                    <img class="card-image-top img-thumbnail" style="height: 300px; width: 100%;" src=@imgSource alt="Image of @Model.YearMakeModel">
+                </a>
             </div>
             <div class="col">
                 <div class="row   w-100">
@@ -131,64 +135,64 @@
                         </div>
                     </div>
 
-                }  
+                }
 
                 <div class="row  w-100 justify-content-end">
                     @if (ViewBag.Source == "Detail")
                     {
                         @Html.ActionLink(
-                                            linkText: "Contact Us",
-                                            actionName: "Contact",
-                                            controllerName: "Home",
-                                            routeValues: new
-                                            {
-                                                id = @Model.VehicleID
+                                                 linkText: "Contact Us",
+                                                 actionName: "Contact",
+                                                 controllerName: "Home",
+                                                 routeValues: new
+                                                 {
+                                                     id = @Model.VehicleID
 
-                                            },
-                                            htmlAttributes: new
-                                            {
-                                                @class = "btn btn-primary"
-                                            }
-                                            )
-                    }
-                    else
-                    {
-                        if (ViewBag.Source == "Admin")
-                        {
-                            @Html.ActionLink(
-                                linkText: "Edit",
-                                actionName: "EditVehicle",
-                                controllerName: "Admin",
-                                routeValues: new
-                                    {
-                                        id = @Model.VehicleID
-
-                                    },
-                                htmlAttributes: new
-                                    {
-                                        @class = "btn btn-primary"
+                                                 },
+                                                 htmlAttributes: new
+                                                 {
+                                                     @class = "btn btn-primary"
+                                                 }
+                                                 )
                                     }
-                            )
-                        }
-                        else
-                        {
-                            @Html.ActionLink(
-                                            linkText: "Details",
-                                            actionName: "Details",
-                                            controllerName: "Inventory",
-                                            routeValues: new
-                                            {
-                                                id = @Model.VehicleID
+                                    else
+                                    {
+                                        if (ViewBag.Source == "Admin")
+                                        {
+                                            @Html.ActionLink(
+                                                     linkText: "Edit",
+                                                     actionName: "EditVehicle",
+                                                     controllerName: "Admin",
+                                                     routeValues: new
+                                                     {
+                                                         id = @Model.VehicleID
 
-                                            },
-                                            htmlAttributes: new
-                                            {
-                                                @class = "btn btn-warning"
-                                            }
-                                            )
+                                                     },
+                                                     htmlAttributes: new
+                                                     {
+                                                         @class = "btn btn-primary"
+                                                     }
+                                                 )
+                                                            }
+                                                            else
+                                                            {
+                                                                @Html.ActionLink(
+                                                                                     linkText: "Details",
+                                                                                     actionName: "Details",
+                                                                                     controllerName: "Inventory",
+                                                                                     routeValues: new
+                                                                                     {
+                                                                                         id = @Model.VehicleID
 
-                        }
-                    }
+                                                                                     },
+                                                                                     htmlAttributes: new
+                                                                                     {
+                                                                                         @class = "btn btn-warning"
+                                                                                     }
+                                                                                     )
+
+                                                                                }
+                                                                            }
                 </div>
             </div>
         </div>
