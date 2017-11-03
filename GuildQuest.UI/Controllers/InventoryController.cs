@@ -95,78 +95,7 @@ namespace GuildQuest.UI.Controllers
             return View("Inventory", vm);
         }
 
-        [System.Web.Mvc.HttpPost, ActionName("SearchInventory")]
-        [ValidateAntiForgeryToken]
-        public ActionResult SearchInventory(SearchViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var searchType = model.SearchType;
-
-                var vm = new InventoryViewModel()
-                {
-                    Vehicles = new List<VehicleViewModel>(),
-                    SearchParms = new SearchViewModel()
-                    
-                };
-
-                vm.SearchParms.SearchType = model.SearchType;
-
-                using (var db = new Models.GuildCarsEntities())
-                {
-                    var vehicles = new List<Vehicle>();
-                    switch (searchType)
-                    {
-                            
-                        case SearchTypeEnum.New:
-                            vehicles = db.Vehicles.Where(v => v.Type == 1).ToList();
-                            break;
-                        case SearchTypeEnum.Used:
-                            vehicles = db.Vehicles.Where(v => v.Type == 0).ToList();
-                            break;
-                        default:
-                            Console.WriteLine("Invalid selection. Please select 1, 2, or 3.");
-                            break;
-                    }
-                      
-                    foreach (Vehicle vehicle in vehicles)
-                    {
-                        vm.Vehicles.Add(new VehicleViewModel()
-                        {
-                            VehicleID = vehicle.VehicleID,
-                            YearMakeModel = $"{vehicle.Year} {vehicle.MakeModel.MakeName} {vehicle.MakeModel.ModelName}",
-                            BodyStyle = vehicle.BodyStyle.BodyStyle1,
-                            TransmissionType = vehicle.TransmissionType.TransmissionType1,
-                            InteriorColor = vehicle.InteriorColor.InteriorColor1,
-                            ExteriorColor = vehicle.ExteriorColor.ExteriorColor1,
-                            Status = (vehicle.Type == 0 ? "Used" : "New"),
-                            Mileage = (vehicle.Type == 0 ? "Used" : "New"),
-                            VINumber = vehicle.VINumber,
-                            SalesPrice = vehicle.SalesPrice.ToString("C0"),
-                            MSRPrice = vehicle.MSRPrice.ToString("C0"),
-                            Sold = vehicle.Sold ,
-                            Featured = vehicle.Featured
-                        });
-                    }
-                };
-                
-                switch (searchType)
-                {
-                    case SearchTypeEnum.New:
-                        return RedirectToAction("New", "Inventory", vm);
-                       
-                    case SearchTypeEnum.Used:
-                        return RedirectToAction("Used", "Inventory", vm);
-                   
-                    default:
-                        Console.WriteLine("Invalid selection. Please select 1, 2, or 3.");
-                        break;
-                }
-
-            }
-
-            return View(model);
-        }
+       
 
 
         [HttpGet, ActionName("Used")]
@@ -208,7 +137,79 @@ namespace GuildQuest.UI.Controllers
             return View("Inventory", vm);
         }
 
+        [System.Web.Http.HttpPost, System.Web.Http.Route("api/SearchInventory")]
+        [ValidateAntiForgeryToken]
+        public ActionResult SearchInventory(SearchViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var searchType = model.SearchType;
 
+                var vm = new InventoryViewModel()
+                {
+                    Vehicles = new List<VehicleViewModel>(),
+                    SearchParms = new SearchViewModel()
+
+                };
+
+                vm.SearchParms.SearchType = model.SearchType;
+
+                using (var db = new Models.GuildCarsEntities())
+                {
+                    var vehicles = new List<Vehicle>();
+                    switch (searchType)
+                    {
+
+                        case SearchTypeEnum.New:
+                            vehicles = db.Vehicles.Where(v => v.Type == 1).ToList();
+                            break;
+                        case SearchTypeEnum.Used:
+                            vehicles = db.Vehicles.Where(v => v.Type == 0).ToList();
+                            break;
+                        default:
+                            Console.WriteLine("Invalid selection. Please select 1, 2, or 3.");
+                            break;
+                    }
+
+                    foreach (Vehicle vehicle in vehicles)
+                    {
+                        vm.Vehicles.Add(new VehicleViewModel()
+                        {
+                            VehicleID = vehicle.VehicleID,
+                            YearMakeModel = $"{vehicle.Year} {vehicle.MakeModel.MakeName} {vehicle.MakeModel.ModelName}",
+                            BodyStyle = vehicle.BodyStyle.BodyStyle1,
+                            TransmissionType = vehicle.TransmissionType.TransmissionType1,
+                            InteriorColor = vehicle.InteriorColor.InteriorColor1,
+                            ExteriorColor = vehicle.ExteriorColor.ExteriorColor1,
+                            Status = (vehicle.Type == 0 ? "Used" : "New"),
+                            Mileage = (vehicle.Type == 0 ? "Used" : "New"),
+                            VINumber = vehicle.VINumber,
+                            SalesPrice = vehicle.SalesPrice.ToString("C0"),
+                            MSRPrice = vehicle.MSRPrice.ToString("C0"),
+                            Sold = vehicle.Sold,
+                            Featured = vehicle.Featured
+                        });
+                    }
+                };
+
+                switch (searchType)
+                {
+                    case SearchTypeEnum.New:
+                        return PartialView("_InventoryPartial",vm);
+
+                    case SearchTypeEnum.Used:
+                        return PartialView("_InventoryPartial", vm);
+
+                    default:
+                        Console.WriteLine("Invalid selection. Please select 1, 2, or 3.");
+                        return new HttpNotFoundResult();
+                       
+                }
+
+            }
+
+            return View(model);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

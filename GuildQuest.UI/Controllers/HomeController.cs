@@ -6,6 +6,8 @@ using System.Net.Http.Formatting;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
+using GuildQuest.UI.Helpers.Twilio;
+
 
 namespace GuildQuest.UI.Controllers
 {
@@ -90,7 +92,12 @@ namespace GuildQuest.UI.Controllers
                     };
                     db.Contacts.Add(contact);
                     db.SaveChanges();
+
+                    var ts = new TwilioRestClient.RestClient();
+                    var tt = ts.SendMessage(model.Phone, model.Subject);
+                    var tu = tt.Result;
                 }
+
                 return RedirectToAction("Index");
             }
 

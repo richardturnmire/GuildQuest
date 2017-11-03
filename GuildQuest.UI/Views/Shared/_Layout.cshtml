@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge"> 
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>@ViewBag.Title - Guild Qwest</title>   
+    <title>@ViewBag.Title - Guild Qwest</title>
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css" rel="stylesheet">
-    
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -28,25 +28,25 @@
                         @Html.ActionLink("Home", "Index", new { controller = "Home" }, new { id = "Index", @class = "nav-link vdivide " })
                     </li>
                     <li class="nav-item">
-                        @Html.ActionLink("New Inventory", "New", new { controller = "Inventory" }, new {id="New", @class = "nav-link vdivide" })
+                        @Html.ActionLink("New Inventory", "New", new { controller = "Inventory" }, new { id = "New", @class = "nav-link vdivide" })
                     </li>
                     <li class="nav-item">
-                        @Html.ActionLink("Used Inventory", "Used", new { controller = "Inventory" }, new {id="Used", @class = "nav-link  vdivide" })
+                        @Html.ActionLink("Used Inventory", "Used", new { controller = "Inventory" }, new { id = "Used", @class = "nav-link  vdivide" })
                     </li>
                     <li class="nav-item">
-                        @Html.ActionLink("Specials", "Specials", new { controller = "Home" }, new { id="Specials", @class = "nav-link vdivide" })
-                    </li> 
-                    <li class="nav-item">
-                        @Html.ActionLink("Contact", "Contact", new { controller = "Home" }, new {id="Contact",  @class = "nav-link vdivide" })
+                        @Html.ActionLink("Specials", "Specials", new { controller = "Home" }, new { id = "Specials", @class = "nav-link vdivide" })
                     </li>
-                   
+                    <li class="nav-item">
+                        @Html.ActionLink("Contact", "Contact", new { controller = "Home" }, new { id = "Contact", @class = "nav-link vdivide" })
+                    </li>
+
                     @if (!Request.IsAuthenticated)
                     {
                         <li class="nav-item">
-                            @Html.ActionLink("Sales", "Sales", new { controller = "Sales" }, new { id="Sales", @class = "nav-link vdivide" })
+                            @Html.ActionLink("Sales", "Sales", new { controller = "Sales" }, new { id = "Sales", @class = "nav-link vdivide" })
                         </li>
                         <li class="nav-item">
-                            @Html.ActionLink("Admin", "Vehicles", new { controller = "Admin" }, new { id="Admin", @class = "nav-link vdivide" })
+                            @Html.ActionLink("Admin", "Vehicles", new { controller = "Admin" }, new { id = "Admin", @class = "nav-link vdivide" })
                         </li>
                     }
 
@@ -72,17 +72,18 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryajax")
     @Scripts.Render("~/bundles/bootstrap")
-    
+
     <script>
         $(document).ready(function () {
             var pager = new Guild.Pager();
-            
-                pager.paragraphsPerPage = 5; // set amount elements per page
-                pager.pagingContainer = $('#inventoryList'); // set of main container
-                pager.paragraphs = $('.card', pager.pagingContainer); // set of required containers
-                pager.showPage(1);
-          
+
+            pager.paragraphsPerPage = 5; // set amount elements per page
+            pager.pagingContainer = $('#inventoryList'); // set of main container
+            pager.paragraphs = $('.card', pager.pagingContainer); // set of required containers
+            pager.showPage(1);
+
             var loc = window.location.href; // grabbing the url
             var filename = loc.substr(loc.lastIndexOf('/') + 1);
             if (filename.length > 0) {

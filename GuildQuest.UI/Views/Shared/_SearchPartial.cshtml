@@ -1,10 +1,17 @@
-﻿@using GuildQuest.UI.Models
+﻿@using GuildQuest.UI.Models                                                                                  
+
+
 @model SearchViewModel
 
 
 <div>
-    @using (Html.BeginForm("SearchInventory", "Inventory", FormMethod.Post,
-                                                            new { enctype = "multipart/form-data", @id = "searchBar", @class = " w-100  justify-content-between " }))
+    @*@using (Html.BeginForm("SearchInventory", "Inventory", FormMethod.Post,
+                                                            new { enctype = "multipart/form-data", @id = "searchBar", @class = " w-100  justify-content-between " }))*@
+    @using (Ajax.BeginForm("SearchInventory", "Inventory", null,
+        new AjaxOptions { HttpMethod = "POST",  UpdateTargetId = "inventoryList", InsertionMode = InsertionMode.Replace,
+        },
+        new { enctype = "multipart/form-data", id = "searchBar", name = "searchBar", @class = " w-100  justify-content-between " }))
+
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)

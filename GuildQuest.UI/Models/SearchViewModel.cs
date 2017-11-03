@@ -98,7 +98,7 @@ namespace GuildQuest.UI.Models
                 pricesMin.Add(it);
                 pricesMax.Add(it);
             }
-
+           
             MinYears = new SelectList(yearsMin, "Value", "Text");
             MaxYears = new SelectList(yearsMax, "Value", "Text"); ;
             MinPrices = new SelectList(pricesMin, "Value", "Text");

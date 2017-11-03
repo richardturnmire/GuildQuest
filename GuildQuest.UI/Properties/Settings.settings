@@ -9,7 +9,7 @@
       <Value Profile="(Default)">2a8844af60dfa744f3da5be748a69f5b</Value>
     </Setting>
     <Setting Name="Twilio_Number" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">+15024439696</Value>
+      <Value Profile="(Default)">+15024431419</Value>
     </Setting>
   </Settings>
 </SettingsFile>

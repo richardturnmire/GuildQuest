@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
+﻿using GuildQuest.UI.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using GuildQuest.UI.Models;
+using System;
+using System.Configuration;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using Twilio;
-using Twilio.Clients;
+ 
 using Twilio.Rest.Api.V2010.Account;
 using Twilio.Types;
 using GuildQuest.UI.Helpers.Twilio;
-using System.Configuration;
 
 namespace GuildQuest.UI
 {
@@ -31,30 +27,21 @@ namespace GuildQuest.UI
 
     public class SmsService : IIdentityMessageService
     {
-        //private readonly TwilioMessageSender _messageSender;
+        private readonly ITwilioMessageSender _messageSender;
 
-        //public SmsService() : this(new TwilioMessageSender()) { }
+        public SmsService() : this(new TwilioMessageSender()) { }
 
-        //public SmsService(ITwilioMessageSender messageSender)
-        //{
-        //    _messageSender = messageSender;
-        //}
-
-        public   Task SendAsync(IdentityMessage message)
+        public SmsService(ITwilioMessageSender messageSender)
         {
-            TwilioClient.Init(ConfigurationManager.AppSettings["Twilio_AccountSID"], ConfigurationManager.AppSettings["Twilio_AuthToken"]);
+            _messageSender = messageSender;
+        }
 
-          
+        public async Task SendAsync(IdentityMessage message)
+        {
+             await _messageSender.SendMessageAsync(message.Destination,
+                Credentials.TwilioPhoneNumber,
+                message.Body);
             
-
-            var message2 = MessageResource.Create(
-                new PhoneNumber("+15024173849"),
-                from: new PhoneNumber(ConfigurationManager.AppSettings["Twilio_Number"]),
-                body: "Hello World!"
-            );
-            
-
-            return Task.FromResult(0);
         }
     }
 
