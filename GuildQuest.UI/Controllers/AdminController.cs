@@ -32,7 +32,8 @@ namespace GuildQuest.UI.Controllers
                 SearchParms = new SearchViewModel()
             };
 
-            vm.SearchParms.SearchType = SearchTypeEnum.New;
+            vm.SearchParms.SearchType = SearchTypeEnum.Undefined;
+            ViewBag.SearchType = vm.SearchParms.SearchType;
 
             using (var db = new Models.GuildCarsEntities())
             {

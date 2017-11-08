@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Core.Mapping;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -67,6 +68,9 @@ namespace GuildQuest.UI.Controllers
             };
 
             vm.SearchParms.SearchType = SearchTypeEnum.New;
+            ViewBag.SearchType = vm.SearchParms.SearchType;
+
+
 
             using (var db = new Models.GuildCarsEntities())
             {
@@ -109,6 +113,9 @@ namespace GuildQuest.UI.Controllers
                 SearchParms = new SearchViewModel()
             };
 
+            vm.SearchParms.SearchType = SearchTypeEnum.Used;
+            ViewBag.SearchType = vm.SearchParms.SearchType;
+
             using (var db = new Models.GuildCarsEntities())
             {
                 var vehicles = db.Vehicles.Where(v => v.Type == 0).ToList();
@@ -137,13 +144,14 @@ namespace GuildQuest.UI.Controllers
             return View("Inventory", vm);
         }
 
-        [System.Web.Http.HttpPost, System.Web.Http.Route("api/SearchInventory")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult SearchInventory(SearchViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var searchType = model.SearchType;
+                var searchArg = (model.SearchArg  ??  String.Empty).ToLower();
 
                 var vm = new InventoryViewModel()
                 {
@@ -153,63 +161,96 @@ namespace GuildQuest.UI.Controllers
                 };
 
                 vm.SearchParms.SearchType = model.SearchType;
+                ViewBag.SearchType = model.SearchType;
+
+                int minYear;  
+                int maxYear; 
+
+                if (!int.TryParse(model.SearchMinYear, out minYear))
+                {
+                    minYear = 1990;
+                }
+                if (!int.TryParse(model.SearchMaxYear, out maxYear))
+                {
+                    maxYear = DateTime.Today.Year + 1;
+                }
+
+                int minPrice;
+                int maxPrice;
+
+                if (!int.TryParse(model.SearchMinPrice.Trim(), out minPrice))
+                {
+                    minPrice = 0;
+                }
+                if (!int.TryParse(model.SearchMaxPrice.Trim(), out maxPrice))
+                {
+                    maxPrice = int.MaxValue;
+                }
 
                 using (var db = new Models.GuildCarsEntities())
                 {
+                    
+                    var vehicle2 =
+                        db.Vehicles
+                        .Where(v => (v.Year >= minYear && v.Year <= maxYear))
+                        .Where(v => v.SalesPrice >= minPrice && v.SalesPrice <= maxPrice);
+
                     var vehicles = new List<Vehicle>();
                     switch (searchType)
                     {
-
                         case SearchTypeEnum.New:
-                            vehicles = db.Vehicles.Where(v => v.Type == 1).ToList();
+                            vehicles = vehicle2.Where(t => t.Type == 1).ToList();
                             break;
                         case SearchTypeEnum.Used:
-                            vehicles = db.Vehicles.Where(v => v.Type == 0).ToList();
+                            vehicles = vehicle2.Where(t => t.Type == 0).ToList();
                             break;
                         default:
-                            Console.WriteLine("Invalid selection. Please select 1, 2, or 3.");
+                            vehicles = vehicle2.ToList();
                             break;
                     }
-
+                    var checkMakeModel = !String.IsNullOrWhiteSpace(searchArg);
                     foreach (Vehicle vehicle in vehicles)
                     {
-                        vm.Vehicles.Add(new VehicleViewModel()
+                        bool selectVehicle = false;
+                        if (checkMakeModel)
                         {
-                            VehicleID = vehicle.VehicleID,
-                            YearMakeModel = $"{vehicle.Year} {vehicle.MakeModel.MakeName} {vehicle.MakeModel.ModelName}",
-                            BodyStyle = vehicle.BodyStyle.BodyStyle1,
-                            TransmissionType = vehicle.TransmissionType.TransmissionType1,
-                            InteriorColor = vehicle.InteriorColor.InteriorColor1,
-                            ExteriorColor = vehicle.ExteriorColor.ExteriorColor1,
-                            Status = (vehicle.Type == 0 ? "Used" : "New"),
-                            Mileage = (vehicle.Type == 0 ? "Used" : "New"),
-                            VINumber = vehicle.VINumber,
-                            SalesPrice = vehicle.SalesPrice.ToString("C0"),
-                            MSRPrice = vehicle.MSRPrice.ToString("C0"),
-                            Sold = vehicle.Sold,
-                            Featured = vehicle.Featured
-                        });
+                            selectVehicle = vehicle.MakeModel.MakeName.ToLower().Contains(searchArg)
+                                        || vehicle.MakeModel.ModelName.ToLower().Contains(searchArg);
+                        }
+                        else
+                        {
+                            selectVehicle = true;
+                        }
+                        if (selectVehicle)
+                        {
+                            vm.Vehicles.Add(new VehicleViewModel()
+                            {
+                                VehicleID = vehicle.VehicleID,
+                                YearMakeModel =
+                                    $"{vehicle.Year} {vehicle.MakeModel.MakeName} {vehicle.MakeModel.ModelName}",
+                                BodyStyle = vehicle.BodyStyle.BodyStyle1,
+                                TransmissionType = vehicle.TransmissionType.TransmissionType1,
+                                InteriorColor = vehicle.InteriorColor.InteriorColor1,
+                                ExteriorColor = vehicle.ExteriorColor.ExteriorColor1,
+                                Status = (vehicle.Type == 0 ? "Used" : "New"),
+                                Mileage = (vehicle.Type == 0 ? "Used" : "New"),
+                                VINumber = vehicle.VINumber,
+                                SalesPrice = vehicle.SalesPrice.ToString("C0"),
+                                MSRPrice = vehicle.MSRPrice.ToString("C0"),
+                                Sold = vehicle.Sold,
+                                Featured = vehicle.Featured
+                            });
+                        }
                     }
                 };
 
-                switch (searchType)
-                {
-                    case SearchTypeEnum.New:
-                        return PartialView("_InventoryPartial",vm);
-
-                    case SearchTypeEnum.Used:
-                        return PartialView("_InventoryPartial", vm);
-
-                    default:
-                        Console.WriteLine("Invalid selection. Please select 1, 2, or 3.");
-                        return new HttpNotFoundResult();
-                       
-                }
+                return PartialView("_InventoryPartial", vm);
 
             }
 
             return View(model);
         }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -218,6 +259,5 @@ namespace GuildQuest.UI.Controllers
             }
             base.Dispose(disposing);
         }
-
     }
 }

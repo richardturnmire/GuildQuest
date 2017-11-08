@@ -8,10 +8,11 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 using System.Web.Hosting;
 using System.Web.Http;
 using System.Web.Http.Results;
-using System.Web.Mvc;
+// using System.Web.Mvc;
 using GuildQuest.UI.Helpers.Enums;
 using GuildQuest.UI.Models;
 using Newtonsoft.Json;
@@ -29,8 +30,8 @@ namespace GuildQuest.UI.Controllers
         //}
 
        
-        [System.Web.Http.Route("api/getmodelsbymakeid/{id}")]
-        [System.Web.Http.AcceptVerbs("GET")]
+        [Route("api/getmodelsbymakeid/{id}")]
+        [AcceptVerbs("GET")]
         public IHttpActionResult GetModelsByMakeId(int id)
         {
             var db = new GuildCarsEntities();
@@ -41,7 +42,65 @@ namespace GuildQuest.UI.Controllers
             return Json(models);
 
         }
-        
+
+        //[HttpPost, Route("api/SearchInventory")]
+        //public IHttpActionResult SearchInventory(SearchViewModel model)
+        //{
+        //    var vm = new InventoryViewModel()
+        //    {
+        //        SearchParms = model,
+        //        Vehicles = new List<VehicleViewModel>()
+        //    };
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        var searchType = model.SearchType;
+                
+        //        var vehicles = new List<Vehicle>();
+
+        //        using (var db = new Models.GuildCarsEntities())
+        //        {
+        //            switch (searchType)
+        //            {
+
+        //                case SearchTypeEnum.New:
+        //                    vehicles = db.Vehicles.Where(v => v.Type == 1).ToList();
+        //                    break;
+        //                case SearchTypeEnum.Used:
+        //                    vehicles = db.Vehicles.Where(v => v.Type == 0).ToList();
+        //                    break;
+        //                default:
+        //                    Console.WriteLine("Invalid selection. Please select 1, 2, or 3.");
+        //                    break;
+        //            }
+               
+
+        //        foreach (Vehicle vehicle in vehicles)
+        //            {
+        //                vm.Vehicles.Add(new VehicleViewModel()
+        //                {
+        //                    VehicleID = vehicle.VehicleID,
+        //                    YearMakeModel =
+        //                        $"{vehicle.Year} {vehicle.MakeModel.MakeName} {vehicle.MakeModel.ModelName}",
+        //                    BodyStyle = vehicle.BodyStyle.BodyStyle1,
+        //                    TransmissionType = vehicle.TransmissionType.TransmissionType1,
+        //                    InteriorColor = vehicle.InteriorColor.InteriorColor1,
+        //                    ExteriorColor = vehicle.ExteriorColor.ExteriorColor1,
+        //                    Status = (vehicle.Type == 0 ? "Used" : "New"),
+        //                    Mileage = (vehicle.Type == 0 ? "Used" : "New"),
+        //                    VINumber = vehicle.VINumber,
+        //                    SalesPrice = vehicle.SalesPrice.ToString("C0"),
+        //                    MSRPrice = vehicle.MSRPrice.ToString("C0"),
+        //                    Sold = vehicle.Sold,
+        //                    Featured = vehicle.Featured
+        //                });
+        //            }
+        //        }
+        //    }
+
+        //    return PartialView("_InventoryPartialView", vm);
+
+        //}
         //// POST api/<controller>
         //public void Post([FromBody]string value)
         //{

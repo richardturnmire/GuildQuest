@@ -9,5 +9,6 @@ namespace GuildQuest.UI.Helpers.Enums
     {
         New,
         Used,
+        Undefined
     }
 }

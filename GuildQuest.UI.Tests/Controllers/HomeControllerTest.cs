@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GuildQuest.UI;
 using GuildQuest.UI.Controllers;
 
-namespace GuildQuest.UI.Tests.Controllers
+namespace GuildQuest.Tests.Controllers
 {
     [TestClass]
     public class HomeControllerTest

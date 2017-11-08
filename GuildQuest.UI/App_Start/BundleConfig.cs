@@ -9,27 +9,31 @@ namespace GuildQuest.UI
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.min.js"));
+                "~/Scripts/jquery-{version}.js"
+            ));
+
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
-
-            bundles.Add(new ScriptBundle("~/bundles/jqueryajax").Include(
-                "~/Scripts/jquery.unobtrusive-ajax.min.js"));
+                        "~/Scripts/jquery-{version}.min.js",
+                        "~/Scripts/jquery.validate-vsdoc.js",
+                        "~/Scripts/jquery.validate.min.js",
+                        "~/Scripts/jquery.validate.unobtrusive.min.js",
+                        "~/Scripts/jquery.unobtrusive-ajax.min.js",
+                        "~/Scripts/jquery.fancybox.min.js"
+                        ));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"
-                        ));
+                    "~/Scripts/modernizr-*"
+                    ));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                    "~/Scripts/popper.min.js",
                     "~/Scripts/bootstrap.min.js",
                     "~/Scripts/mdb.min.js",
+                    "~/Scripts/popper.min.js",
                     "~/Scripts/respond*",
-                    "~/Scripts/Guild_Script.js",
-                    "~/Scripts/jquery.fancybox.min.js"
+                    "~/Scripts/Guild_Script.js"
                      ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
@@ -39,6 +43,8 @@ namespace GuildQuest.UI
                     "~/Content/style.css",
                     "~/Content/jquery.fancybox.min.css"
                     ));
+
+           
         }
     }
 }

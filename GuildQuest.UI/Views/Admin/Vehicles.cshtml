@@ -1,6 +1,10 @@
 ﻿@using GuildQuest.UI.Models
 @model InventoryViewModel
 
+@{
+    Model.SearchParms.SearchType = ViewBag.SearchType;
+}
+
 <div class="rgba-blue-light">
 
     <div class="container-fluid">
@@ -11,15 +15,15 @@
         <div class="my-3 ml-2 row h3">
             <u>
                 @Html.ActionLink(
-                                           linkText: "Add a new vehicle",
-                                           actionName: "AddVehicle",
-                                           controllerName: "Admin",
-                                           routeValues: null,
-                                           htmlAttributes: new
-                                           {
-                                               @class = "hm-green-light  "
-                                           }
-                                           )
+                        linkText: "Add a new vehicle",
+                        actionName: "AddVehicle",
+                        controllerName: "Admin",
+                        routeValues: null,
+                        htmlAttributes: new
+                        {
+                            @class = "hm-green-light  "
+                        }
+                        )
             </u>
         </div>
 
@@ -28,52 +32,13 @@
         <div class="row justify-content-center my-3">
             <div id="inventoryHeader"><h1><strong>Search Results</strong></h1></div>
         </div>
-        <nav class="pagingControls">
 
-        </nav>
-        <div class="list-group" id="inventoryList">
-            @foreach (VehicleViewModel vehicle in Model.Vehicles)
-        {
+        @Html.Partial("_InventoryPartial", Model)
 
-            @Html.Partial("_InventoryPartial", @vehicle)
-
-                    }
-        </div>
-        <nav class="pagingControls">
-
-        </nav>
     </div>
 </div>
-
-
-    @section Scripts {
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $(".fancybox").fancybox({
-                    toolbar: false,
-                    smallBtn: true,
-                    iframe: {
-                        preload: false
-                    },
-                    afterClose: function () {
-                        $(this.href).show();
-                        $(this.href).css("display", "block");
-
-                    }
-                });
-                $('[data-fancybox]').fancybox({
-                    toolbar: false,
-                    smallBtn: true,
-                    iframe: {
-                        preload: false
-                    }
-                });
-            });
-
-
-        </script>
-
-       
-    }
-
-
+@section scripts{
+    <script type="text/javascript">
+        Guild.RePager();
+    </script>
+}
