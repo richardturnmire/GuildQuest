@@ -70,6 +70,8 @@ umd/*       linquist-vendored
 #jquery.js     linguist-vendored=false
 #jquery.min.js linquist-vendored=false
 
-*.js    linquist-vendored 
-*.css   linquist-vendored
-*.map   linquist-vendored
+#*.js    linquist-vendored 
+#*.css   linquist-vendored
+#*.map   linquist-vendored
+* linguist-vendored
+*.cs linguist-vendored=false
