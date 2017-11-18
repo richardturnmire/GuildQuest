@@ -46,7 +46,7 @@
                     @if (!Request.IsAuthenticated)
                     {
                         <li class="nav-item">
-                            @Html.ActionLink("Sales", "Sales", new { controller = "Sales" }, new { id = "Sales", @class = "nav-link vdivide" })
+                            @Html.ActionLink("Sales", "Index", new { controller = "Sales" }, new { id = "Sales", @class = "nav-link vdivide" })
                         </li>
                         <li class="nav-item">
                             @Html.ActionLink("Admin", "Vehicles", new { controller = "Admin" }, new { id = "Admin", @class = "nav-link vdivide" })

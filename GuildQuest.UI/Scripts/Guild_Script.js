@@ -1,17 +1,17 @@
 ﻿var Guild = {};
 var renderControls = function (container, currentPage, numPages) {
-    var pagingControls = 'Page: <ul class="pagination pagination-lg  d-inline-flex">';
+    var pagingControls = 'Page: <ul class="pagination pagination-lg pagination-circle bg-light-teal  d-inline-flex">';
     for (var i = 1; i <= numPages; i++) {
         if (i !== currentPage) {
             pagingControls +=
-                '<li class="page-item round bg-light-teal"><a class="page-link" href="#" onclick="pager.showPage(' +
+                '<li class="page-item"><a class="page-link" href="#" onclick="Pager.showPage(' +
                 i +
                 '); return false;">' +
                 i +
                 '</a></li>';
         } else {
             pagingControls +=
-                '<li class="page-item bg-light-blue hm-yellow-light   active"><a class="page-link" href="#" disabled>' +
+                '<li class="page-item active"><a class="page-link" href="#" disabled>' +
                 i +
                 '</a></li>';
         }

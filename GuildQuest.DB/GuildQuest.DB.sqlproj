@@ -84,5 +84,9 @@
     <Build Include="Security\GuildAdmin.sql" />
     <Build Include="Security\GuildAdmin_1.sql" />
     <Build Include="Security\RoleMemberships.sql" />
+    <Build Include="dbo\Tables\State.sql" />
+    <Build Include="dbo\Tables\Sale.sql" />
+    <Build Include="dbo\Tables\PurchaseType.sql" />
+    <Build Include="Security\RICHARD-LAPTOP_Richard.sql" />
   </ItemGroup>
 </Project>

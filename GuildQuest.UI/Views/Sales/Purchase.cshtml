@@ -1,0 +1,117 @@
+﻿@model GuildQuest.UI.Models.InventoryViewModel
+
+@Html.Partial("_InventoryPartial", Model)   
+<div id="salesForm">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h5 class="display-1">Sales Information</h5>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.SaleInfo.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SaleInfo.Name, new { htmlAttributes = new { @class = "form-control control-lg" } })
+                        @Html.ValidationMessageFor(model => model.SaleInfo.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.SaleInfo.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SaleInfo.Phone, new { htmlAttributes = new { @class = "form-control control-lg" } })
+                        @Html.ValidationMessageFor(model => model.SaleInfo.Phone, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div> 
+            
+            <div class="row">   
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.SaleInfo.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SaleInfo.Email, new { htmlAttributes = new { @class = "form-control control-lg" } })
+                        @Html.ValidationMessageFor(model => model.SaleInfo.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>   
+            </div> 
+
+            <div class="row">
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.SaleInfo.Street1, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.SaleInfo.Street1, new { htmlAttributes = new { @class = "form-control control-lg" } })
+                        @Html.ValidationMessageFor(model => model.SaleInfo.Street1, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.SaleInfo.Street2, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.SaleInfo.Street2, new { htmlAttributes = new { @class = "form-control control-lg" } })
+                        @Html.ValidationMessageFor(model => model.SaleInfo.Street2, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div> 
+
+            <div class="row">
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.SaleInfo.City, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SaleInfo.City, new { htmlAttributes = new { @class = "form-control control-lg" } })
+                        @Html.ValidationMessageFor(model => model.SaleInfo.City, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.SaleInfo.StateId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-3">
+                        @Html.DropDownList("StateId", null, string.Empty, htmlAttributes: new { @class = "form-control control-lg" })
+                        @Html.ValidationMessageFor(model => model.SaleInfo.StateId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>  
+
+            <div class="row">
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.SaleInfo.ZipCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.SaleInfo.ZipCode, new { htmlAttributes = new { @class = "form-control control-lg" } })
+                        @Html.ValidationMessageFor(model => model.SaleInfo.ZipCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div> 
+
+            <div class="row">
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.SaleInfo.PurchasePrice, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.SaleInfo.PurchasePrice, new { htmlAttributes = new { @class = "form-control control-lg" } })
+                        @Html.ValidationMessageFor(model => model.SaleInfo.PurchasePrice, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4 ">
+                    @Html.LabelFor(model => model.SaleInfo.PurchaseTypeId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.DropDownList("PurchaseTypeId", null, string.Empty, htmlAttributes: new { @class = "form-control   " })
+                        @Html.ValidationMessageFor(model => model.SaleInfo.PurchaseTypeId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>  
+            
+            <div class="row">
+                <div class="form-group col-md-4">  
+                    <div class="col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />   
+                    </div>
+               </div>
+            </div>
+        </div>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -10,5 +10,7 @@ namespace GuildQuest.UI.Models
         public List<VehicleViewModel> Vehicles { get; set; }
 
         public SearchViewModel SearchParms { get; set; }
+
+        public Sale SaleInfo { get; set; }
     }
 }

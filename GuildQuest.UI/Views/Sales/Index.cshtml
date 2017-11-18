@@ -1,0 +1,29 @@
+﻿@using GuildQuest.UI.Models
+@model InventoryViewModel
+
+@{
+    Model.SearchParms.SearchType = ViewBag.SearchType;
+    ViewBag.Source = "Sales";
+}
+<div style="background-color: whitesmoke">
+
+    <div class="container-fluid">
+        <div class="row justify-content-center ">
+            <div class="mt-3"><h1><strong>@ViewBag.Message</strong></h1></div>
+        </div>
+
+        @Html.Partial("_SearchPartial", Model.SearchParms)
+
+        <div class="row justify-content-center my-3">
+            <div id="inventoryHeader"><h1><strong>Search Results</strong></h1></div>
+        </div>
+
+        @Html.Partial("_InventoryPartial", Model)
+
+    </div>
+</div> 
+@section scripts{
+    <script type="text/javascript">
+        Guild.RePager();
+    </script>
+}

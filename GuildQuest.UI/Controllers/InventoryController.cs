@@ -36,7 +36,11 @@ namespace GuildQuest.UI.Controllers
                 return HttpNotFound();
             }
 
-            var vm = new VehicleViewModel()
+            var ivm = new InventoryViewModel()
+            {
+                Vehicles = new List<VehicleViewModel>()
+            };
+            ivm.Vehicles.Add(new VehicleViewModel()
             {
                 VehicleID = vehicle.VehicleID,
                 YearMakeModel = $"{vehicle.Year} {vehicle.MakeModel.MakeName} {vehicle.MakeModel.ModelName}",
@@ -50,10 +54,10 @@ namespace GuildQuest.UI.Controllers
                 SalesPrice = vehicle.SalesPrice.ToString("C0"),
                 MSRPrice = vehicle.MSRPrice.ToString("C0"),
                 Sold = vehicle.Sold,
-                Featured = vehicle.Featured ,
+                Featured = vehicle.Featured,
                 Description = vehicle.Description ?? "No Description"
-            };
-            return View(vm);
+            });               
+            return View(ivm);
         }
 
         [HttpGet, ActionName("New")]

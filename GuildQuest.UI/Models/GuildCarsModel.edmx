@@ -113,6 +113,30 @@
           <Property Name="ModelID" Type="int" Nullable="false" />
           <Property Name="Model_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="PurchaseType">
+          <Key>
+            <PropertyRef Name="PurchaseTypeId" />
+          </Key>
+          <Property Name="PurchaseTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="SaleId" />
+          </Key>
+          <Property Name="SaleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VehicleId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Street1" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Street2" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StateId" Type="int" Nullable="false" />
+          <Property Name="ZipCode" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="PurchasePrice" Type="money" Nullable="false" />
+          <Property Name="PurchaseTypeId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Special">
           <Key>
             <PropertyRef Name="Special_ID" />
@@ -120,6 +144,28 @@
           <Property Name="Special_ID" Type="int" Nullable="false" />
           <Property Name="Special_Title" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Special_Description" Type="nvarchar" MaxLength="1024" Nullable="false" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="StateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Abbreviation" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Country" Type="varchar" MaxLength="255" />
+          <Property Name="Type" Type="varchar" MaxLength="255" />
+          <Property Name="Sort" Type="int" />
+          <Property Name="Status" Type="varchar" MaxLength="255" />
+          <Property Name="Occupied" Type="varchar" MaxLength="255" />
+          <Property Name="Notes" Type="varchar" MaxLength="255" />
+          <Property Name="FipsState" Type="varchar" MaxLength="255" />
+          <Property Name="AssocPress" Type="varchar" MaxLength="255" />
+          <Property Name="StandardFederalRegion" Type="varchar" MaxLength="255" />
+          <Property Name="CensusRegion" Type="varchar" MaxLength="255" />
+          <Property Name="CensusRegionName" Type="varchar" MaxLength="255" />
+          <Property Name="CensusDivision" Type="varchar" MaxLength="255" />
+          <Property Name="CensusDivisionName" Type="varchar" MaxLength="255" />
+          <Property Name="CircuitCourt" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="TransmissionType">
           <Key>
@@ -228,6 +274,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Sale_PurchaseType">
+          <End Role="PurchaseType" Type="Self.PurchaseType" Multiplicity="1" />
+          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseType">
+              <PropertyRef Name="PurchaseTypeId" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="PurchaseTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sale_State">
+          <End Role="State" Type="Self.State" Multiplicity="1" />
+          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sale_Vehicle">
+          <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="1" />
+          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicle">
+              <PropertyRef Name="VehicleID" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="VehicleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Vehicle_BodyStyle">
           <End Role="BodyStyle" Type="Self.BodyStyle" Multiplicity="1" />
           <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="*" />
@@ -301,7 +383,10 @@
           <EntitySet Name="Make" EntityType="Self.Make" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MakeModel" EntityType="Self.MakeModel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Model" EntityType="Self.Model" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseType" EntityType="Self.PurchaseType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sale" EntityType="Self.Sale" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Special" EntityType="Self.Special" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransmissionType" EntityType="Self.TransmissionType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vehicle" EntityType="Self.Vehicle" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -327,6 +412,18 @@
           <AssociationSet Name="FK_MakeModel_Model" Association="Self.FK_MakeModel_Model">
             <End Role="Model" EntitySet="Model" />
             <End Role="MakeModel" EntitySet="MakeModel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_PurchaseType" Association="Self.FK_Sale_PurchaseType">
+            <End Role="PurchaseType" EntitySet="PurchaseType" />
+            <End Role="Sale" EntitySet="Sale" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_State" Association="Self.FK_Sale_State">
+            <End Role="State" EntitySet="State" />
+            <End Role="Sale" EntitySet="Sale" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_Vehicle" Association="Self.FK_Sale_Vehicle">
+            <End Role="Vehicle" EntitySet="Vehicle" />
+            <End Role="Sale" EntitySet="Sale" />
           </AssociationSet>
           <AssociationSet Name="FK_Vehicle_BodyStyle" Association="Self.FK_Vehicle_BodyStyle">
             <End Role="BodyStyle" EntitySet="BodyStyle" />
@@ -495,6 +592,7 @@
           <Property Name="Year" Type="Int16" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
           <Property Name="Type" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Sales" Relationship="GuildCarsModel.FK_Sale_Vehicle" FromRole="Vehicle" ToRole="Sale" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -667,7 +765,22 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
           <EntitySet Name="Contacts" EntityType="GuildCarsModel.Contact" />
-        </EntityContainer>
+          <EntitySet Name="PurchaseTypes" EntityType="GuildCarsModel.PurchaseType" />
+          <EntitySet Name="States" EntityType="GuildCarsModel.State" />
+          <EntitySet Name="Sales" EntityType="GuildCarsModel.Sale" />
+          <AssociationSet Name="FK_Sale_PurchaseType" Association="GuildCarsModel.FK_Sale_PurchaseType">
+            <End Role="PurchaseType" EntitySet="PurchaseTypes" />
+            <End Role="Sale" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_State" Association="GuildCarsModel.FK_Sale_State">
+            <End Role="State" EntitySet="States" />
+            <End Role="Sale" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_Vehicle" Association="GuildCarsModel.FK_Sale_Vehicle">
+            <End Role="Vehicle" EntitySet="Vehicles" />
+            <End Role="Sale" EntitySet="Sales" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Contact">
           <Key>
             <PropertyRef Name="ContactID" />
@@ -680,7 +793,94 @@
           <Property Name="ContactMessage" Type="String" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="true" />
           <Property Name="ContactGenerated" Type="Boolean" />
         </EntityType>
-      </Schema>
+        <EntityType Name="PurchaseType">
+          <Key>
+            <PropertyRef Name="PurchaseTypeId" />
+          </Key>
+          <Property Name="PurchaseTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sales" Relationship="GuildCarsModel.FK_Sale_PurchaseType" FromRole="PurchaseType" ToRole="Sale" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="StateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Abbreviation" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Sort" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Occupied" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FipsState" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="AssocPress" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="StandardFederalRegion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CensusRegion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CensusRegionName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CensusDivision" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CensusDivisionName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CircuitCourt" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Sales" Relationship="GuildCarsModel.FK_Sale_State" FromRole="State" ToRole="Sale" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="SaleId" />
+          </Key>
+          <Property Name="SaleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VehicleId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Street1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Street2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StateId" Type="Int32" Nullable="false" />
+          <Property Name="ZipCode" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="PurchasePrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="PurchaseTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PurchaseType" Relationship="GuildCarsModel.FK_Sale_PurchaseType" FromRole="Sale" ToRole="PurchaseType" />
+          <NavigationProperty Name="State" Relationship="GuildCarsModel.FK_Sale_State" FromRole="Sale" ToRole="State" />
+          <NavigationProperty Name="Vehicle" Relationship="GuildCarsModel.FK_Sale_Vehicle" FromRole="Sale" ToRole="Vehicle" />
+        </EntityType>
+        <Association Name="FK_Sale_PurchaseType">
+          <End Type="GuildCarsModel.PurchaseType" Role="PurchaseType" Multiplicity="1" />
+          <End Type="GuildCarsModel.Sale" Role="Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseType">
+              <PropertyRef Name="PurchaseTypeId" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="PurchaseTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sale_State">
+          <End Type="GuildCarsModel.State" Role="State" Multiplicity="1" />
+          <End Type="GuildCarsModel.Sale" Role="Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sale_Vehicle">
+          <End Type="GuildCarsModel.Vehicle" Role="Vehicle" Multiplicity="1" />
+          <End Type="GuildCarsModel.Sale" Role="Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicle">
+              <PropertyRef Name="VehicleID" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="VehicleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -838,6 +1038,55 @@
                 <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
                 <ScalarProperty Name="ContactName" ColumnName="ContactName" />
                 <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseTypes">
+            <EntityTypeMapping TypeName="GuildCarsModel.PurchaseType">
+              <MappingFragment StoreEntitySet="PurchaseType">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PurchaseTypeId" ColumnName="PurchaseTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="GuildCarsModel.State">
+              <MappingFragment StoreEntitySet="State">
+                <ScalarProperty Name="CircuitCourt" ColumnName="CircuitCourt" />
+                <ScalarProperty Name="CensusDivisionName" ColumnName="CensusDivisionName" />
+                <ScalarProperty Name="CensusDivision" ColumnName="CensusDivision" />
+                <ScalarProperty Name="CensusRegionName" ColumnName="CensusRegionName" />
+                <ScalarProperty Name="CensusRegion" ColumnName="CensusRegion" />
+                <ScalarProperty Name="StandardFederalRegion" ColumnName="StandardFederalRegion" />
+                <ScalarProperty Name="AssocPress" ColumnName="AssocPress" />
+                <ScalarProperty Name="FipsState" ColumnName="FipsState" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Occupied" ColumnName="Occupied" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Abbreviation" ColumnName="Abbreviation" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales">
+            <EntityTypeMapping TypeName="GuildCarsModel.Sale">
+              <MappingFragment StoreEntitySet="Sale">
+                <ScalarProperty Name="PurchaseTypeId" ColumnName="PurchaseTypeId" />
+                <ScalarProperty Name="PurchasePrice" ColumnName="PurchasePrice" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Street2" ColumnName="Street2" />
+                <ScalarProperty Name="Street1" ColumnName="Street1" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
+                <ScalarProperty Name="SaleId" ColumnName="SaleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -14,6 +14,12 @@ namespace GuildQuest.UI.Models
     
     public partial class Vehicle
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Vehicle()
+        {
+            this.Sales = new HashSet<Sale>();
+        }
+    
         public int VehicleID { get; set; }
         public int MakeModelID { get; set; }
         public int BodyStyleID { get; set; }
@@ -35,5 +41,7 @@ namespace GuildQuest.UI.Models
         public virtual InteriorColor InteriorColor { get; set; }
         public virtual MakeModel MakeModel { get; set; }
         public virtual TransmissionType TransmissionType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Sale> Sales { get; set; }
     }
 }

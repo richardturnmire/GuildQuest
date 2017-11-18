@@ -4,31 +4,40 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="75676d804f444e1b800e99bdbf1a8a81" Name="Diagram1">
-        <EntityTypeShape EntityType="GuildCarsModel.AspNetRole" Width="1.5" PointX="5.75" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GuildCarsModel.AspNetUserClaim" Width="1.5" PointX="10.25" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="GuildCarsModel.AspNetUserLogin" Width="1.5" PointX="10.25" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GuildCarsModel.AspNetUser" Width="1.5" PointX="8" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GuildCarsModel.BodyStyle" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GuildCarsModel.ExteriorColor" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="GuildCarsModel.InteriorColor" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="GuildCarsModel.Make" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GuildCarsModel.MakeModel" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="GuildCarsModel.Model" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GuildCarsModel.Special" Width="1.5" PointX="7.75" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GuildCarsModel.TransmissionType" Width="1.5" PointX="3" PointY="13.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GuildCarsModel.Vehicle" Width="1.5" PointX="5.25" PointY="2.375" IsExpanded="true" />
+      <Diagram DiagramId="75676d804f444e1b800e99bdbf1a8a81" Name="Diagram1" ZoomLevel="100">
+        <EntityTypeShape EntityType="GuildCarsModel.AspNetRole" Width="1.5" PointX="0.5" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuildCarsModel.AspNetUserClaim" Width="1.5" PointX="5.125" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuildCarsModel.AspNetUserLogin" Width="1.5" PointX="5.125" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuildCarsModel.AspNetUser" Width="1.5" PointX="2.875" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuildCarsModel.BodyStyle" Width="1.5" PointX="1.125" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuildCarsModel.ExteriorColor" Width="1.5" PointX="4.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuildCarsModel.InteriorColor" Width="1.5" PointX="0.5" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuildCarsModel.Make" Width="1.5" PointX="0.625" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuildCarsModel.MakeModel" Width="1.5" PointX="2.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuildCarsModel.Model" Width="1.5" PointX="0.625" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuildCarsModel.Special" Width="1.5" PointX="8.875" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuildCarsModel.TransmissionType" Width="1.5" PointX="6.5" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GuildCarsModel.Vehicle" Width="1.5" PointX="5.5" PointY="0.5" IsExpanded="true" />
         <AssociationConnector Association="GuildCarsModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="GuildCarsModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="GuildCarsModel.FK_Vehicle_BodyStyle" ManuallyRouted="false" />
-        <AssociationConnector Association="GuildCarsModel.FK_Vehicle_ExteriorColor" ManuallyRouted="false" />
-        <AssociationConnector Association="GuildCarsModel.FK_Vehicle_InteriorColor" ManuallyRouted="false" />
+        <AssociationConnector Association="GuildCarsModel.FK_Vehicle_ExteriorColor" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="GuildCarsModel.FK_Vehicle_InteriorColor" ManuallyRouted="false" >
+        </AssociationConnector>
         <AssociationConnector Association="GuildCarsModel.FK_MakeModel_Make" ManuallyRouted="false" />
         <AssociationConnector Association="GuildCarsModel.FK_MakeModel_Model" ManuallyRouted="false" />
         <AssociationConnector Association="GuildCarsModel.FK_Vehicle_MakeModel" ManuallyRouted="false" />
-        <AssociationConnector Association="GuildCarsModel.FK_Vehicle_TransmissionType" ManuallyRouted="false" />
+        <AssociationConnector Association="GuildCarsModel.FK_Vehicle_TransmissionType" ManuallyRouted="false" >
+        </AssociationConnector>
         <AssociationConnector Association="GuildCarsModel.AspNetUserRoles" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="GuildCarsModel.Contact" Width="1.5" PointX="7.75" PointY="4.125" />
+        <EntityTypeShape EntityType="GuildCarsModel.Contact" Width="1.5" PointX="11.125" PointY="8.625" />
+        <EntityTypeShape EntityType="GuildCarsModel.PurchaseType" Width="1.5" PointX="9.5" PointY="4.75" />
+        <EntityTypeShape EntityType="GuildCarsModel.State" Width="1.5" PointX="11.5" PointY="0.5" />
+        <EntityTypeShape EntityType="GuildCarsModel.Sale" Width="1.5" PointX="9.5" PointY="0.5" />
+        <AssociationConnector Association="GuildCarsModel.FK_Sale_PurchaseType" />
+        <AssociationConnector Association="GuildCarsModel.FK_Sale_State" />
+        <AssociationConnector Association="GuildCarsModel.FK_Sale_Vehicle" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
