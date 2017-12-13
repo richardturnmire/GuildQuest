@@ -1,11 +1,10 @@
 ﻿using GuildQuest.UI.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.Formatting;
-using System.Web;
-using System.Web.Http;
 using System.Web.Mvc;
+using GuildQuest.Data.EF;
+using GuildQuest.Data.Interfaces;
+using GuildQuest.Data.Repositories;
 using GuildQuest.UI.Helpers.Twilio;
 
 
@@ -13,17 +12,28 @@ namespace GuildQuest.UI.Controllers
 {
     public class HomeController : Controller
     {
+        private IRepository repository = null;
+
+        public HomeController()
+        {
+            this.repository = new EfRepository();
+        }
+
+        public HomeController(IRepository repository)
+        {
+            this.repository = repository;
+        }
         public ActionResult Index()
         {
             var vm = new MainPageViewModel();
            
-            using (var db = new Models.GuildCarsEntities())
-            {
-                var vehicles = db.Vehicles.Where(v => v.Featured == true);
+           
+                var vehicles = repository.GetFeaturedVehicles();
+                    
                 vm.Featured = new List<VehicleViewModel>();
                 foreach (Vehicle vehicle in vehicles)
                 {
-                    vm.Specials = db.Specials.ToList();
+                    vm.Specials = repository.GetSpecials().ToList();
                     vm.Featured.Add(new VehicleViewModel()
                     {
                         VehicleID = vehicle.VehicleID,
@@ -41,7 +51,7 @@ namespace GuildQuest.UI.Controllers
                         Featured = vehicle.Featured
                     });
                 }
-            };
+          
 
             return View(vm);
         }
@@ -50,13 +60,7 @@ namespace GuildQuest.UI.Controllers
         {
             ViewBag.Message = "Specials";
 
-            var vm = new List<Special>();
-            using (var db = new Models.GuildCarsEntities())
-            {
-                vm = db.Specials.ToList();
-            };
-
-            return View(vm);
+            return View(repository.GetSpecials().ToList());
         }
 
         public ActionResult About()
@@ -80,8 +84,7 @@ namespace GuildQuest.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var db = new Models.GuildCarsEntities())
-                {
+                
                     var contact = new Contact()
                     {
                         ContactEmail = model.Email,
@@ -90,13 +93,13 @@ namespace GuildQuest.UI.Controllers
                         ContactPhone = model.Phone,
                         ContactSubject = model.Subject
                     };
-                    db.Contacts.Add(contact);
-                    db.SaveChanges();
-
+                
+                    repository.AddContact(contact);
+                    
                     var ts = new TwilioRestClient.RestClient();
                     var tt = ts.SendMessage(model.Phone, model.Subject);
                     var tu = tt.Result;
-                }
+               
 
                 return RedirectToAction("Index");
             }

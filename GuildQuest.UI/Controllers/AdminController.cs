@@ -1,23 +1,36 @@
-﻿using System;
+﻿using GuildQuest.UI.Helpers.Enums;
+using GuildQuest.UI.Models;
+using ImageProcessor;
+using ImageProcessor.Imaging.Formats;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using GuildQuest.UI.Helpers.Enums;
-using GuildQuest.UI.Models;
-using System.IO;
-using ImageProcessor.Imaging.Formats;
-using System.Drawing;
-using ImageProcessor;
+using GuildQuest.Data.EF;
+using GuildQuest.Data.Helpers.Enums;
+using GuildQuest.Data.Interfaces;
+using GuildQuest.Data.Repositories;
 
 namespace GuildQuest.UI.Controllers
 {
     public class AdminController : Controller
     {
-        private GuildCarsEntities db = new GuildCarsEntities();
+        private IRepository repository = null;
+
+        public AdminController()
+        {
+            this.repository = new EfRepository();
+        }
+
+        public AdminController(IRepository repository)
+        {
+            this.repository = repository;
+        }
 
         // GET: Admin
         [ActionName("Vehicles")]
@@ -32,32 +45,31 @@ namespace GuildQuest.UI.Controllers
                 SearchParms = new SearchViewModel()
             };
 
-            vm.SearchParms.SearchType = SearchTypeEnum.Undefined;
+            vm.SearchParms.SearchType = VehicleTypeEnum.Undefined;
             ViewBag.SearchType = vm.SearchParms.SearchType;
 
-            using (var db = new Models.GuildCarsEntities())
+            
+
+            foreach (Vehicle vehicle in repository.GetAllVehicles())
             {
-                var vehicles = db.Vehicles;
-                foreach (Vehicle vehicle in vehicles)
+                vm.Vehicles.Add(new VehicleViewModel()
                 {
-                    vm.Vehicles.Add(new VehicleViewModel()
-                    {
-                        VehicleID = vehicle.VehicleID,
-                        YearMakeModel = $"{vehicle.Year} {vehicle.MakeModel.MakeName} {vehicle.MakeModel.ModelName}",
-                        BodyStyle = vehicle.BodyStyle.BodyStyle1,
-                        TransmissionType = vehicle.TransmissionType.TransmissionType1,
-                        InteriorColor = vehicle.InteriorColor.InteriorColor1,
-                        ExteriorColor = vehicle.ExteriorColor.ExteriorColor1,
-                        Status = (vehicle.Type == (short)VehicleType.Used ? "Used" : "New"),
-                        Mileage = vehicle.Mileage.ToString("###,###"),
-                        VINumber = vehicle.VINumber,
-                        SalesPrice = vehicle.SalesPrice.ToString("C0"),
-                        MSRPrice = vehicle.MSRPrice.ToString("C0"),
-                        Sold = vehicle.Sold,
-                        Featured = vehicle.Featured
-                    });
-                }
-            };
+                    VehicleID = vehicle.VehicleID,
+                    YearMakeModel = $"{vehicle.Year} {vehicle.MakeModel.MakeName} {vehicle.MakeModel.ModelName}",
+                    BodyStyle = vehicle.BodyStyle.BodyStyle1,
+                    TransmissionType = vehicle.TransmissionType.TransmissionType1,
+                    InteriorColor = vehicle.InteriorColor.InteriorColor1,
+                    ExteriorColor = vehicle.ExteriorColor.ExteriorColor1,
+                    Status = (vehicle.Type == (short)VehicleType.Used ? "Used" : "New"),
+                    Mileage = vehicle.Mileage.ToString("###,###"),
+                    VINumber = vehicle.VINumber,
+                    SalesPrice = vehicle.SalesPrice.ToString("C0"),
+                    MSRPrice = vehicle.MSRPrice.ToString("C0"),
+                    Sold = vehicle.Sold,
+                    Featured = vehicle.Featured
+                });
+            }
+
 
             return View("Vehicles", vm);
         }
@@ -70,7 +82,9 @@ namespace GuildQuest.UI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vehicle vehicle = db.Vehicles.Find(id);
+
+             
+            Vehicle vehicle = repository.GetVehicleById(id);
             if (vehicle == null)
             {
                 return HttpNotFound();
@@ -83,13 +97,7 @@ namespace GuildQuest.UI.Controllers
         [ActionName("AddVehicle")]
         public ActionResult Add()
         {
-            ViewBag.BodyStyleID = new SelectList(db.BodyStyles, "BodyStyleID", "BodyStyle1");
-            ViewBag.ExteriorColorID = new SelectList(db.ExteriorColors, "ExteriorColorID", "ExteriorColor1");
-            ViewBag.InteriorColorID = new SelectList(db.InteriorColors, "InteriorColorID", "InteriorColor1");
-            ViewBag.MakeModelID = new SelectList(db.MakeModels, "MakeModelID", "MakeName");
-            ViewBag.TransmissionTypeID = new SelectList(db.TransmissionTypes, "TransmissionTypeID", "TransmissionType1");
-            ViewBag.MakeId = new SelectList(db.Makes.OrderBy(d => d.Make_Name), "MakeId", "Make_Name");
-            ViewBag.ModelId = new SelectList(db.MakeModels.Take(1), "ModelId", "ModelName");
+             
 
             var vm = new VehicleViewModel()
             {
@@ -99,7 +107,14 @@ namespace GuildQuest.UI.Controllers
                 BodyStyleID = -1,
                 TransmissionTypeID = -1,
                 InteriorColorID = -1,
-                ExteriorColorID = -1
+                ExteriorColorID = -1,
+                BodyStyleIDs = new SelectList(repository.GetBodyStyles(), "BodyStyleID", "BodyStyle1"),
+                ExteriorColorIDs = new SelectList(repository.GetExteriorColors(), "ExteriorColorID", "ExteriorColor1"),
+                InteriorColorIDs = new SelectList(repository.GetInteriorColors(), "InteriorColorID", "InteriorColor1"),
+                MakeModelIDs = new SelectList(repository.GetMakeModels(), "MakeModelID", "MakeName"),
+                TransmissionTypeIDs = new SelectList(repository.GetTransmissionTypes(), "TransmissionTypeID", "TransmissionType1"),
+                MakeIds = new SelectList(repository.GetMakes().OrderBy(d => d.Make_Name), "MakeId", "Make_Name"),
+                ModelIds = new SelectList(repository.GetMakeModels().Take(1), "ModelId", "ModelName")
             };
 
             return View(vm);
@@ -113,6 +128,16 @@ namespace GuildQuest.UI.Controllers
         [ActionName("AddVehicle")]
         public ActionResult Add([Bind(Include = "VehicleID,MakeId,ModelId,BodyStyleID,TransmissionTypeID,InteriorColorID,ExteriorColorID,Mileage,VINumber,SalesPrice,MSRPrice,Sold,Featured,Year,Description,FileUpload")] VehicleViewModel vehicle)
         {
+            
+
+            vehicle.BodyStyleIDs = new SelectList(repository.GetBodyStyles(), "BodyStyleID", "BodyStyle1");
+            vehicle.ExteriorColorIDs = new SelectList(repository.GetExteriorColors(), "ExteriorColorID", "ExteriorColor1");
+            vehicle.InteriorColorIDs = new SelectList(repository.GetInteriorColors(), "InteriorColorID", "InteriorColor1");
+            vehicle.MakeModelIDs = new SelectList(repository.GetMakeModels(), "MakeModelID", "MakeName");
+            vehicle.TransmissionTypeIDs = new SelectList(repository.GetTransmissionTypes(), "TransmissionTypeID", "TransmissionType1");
+            vehicle.MakeIds = new SelectList(repository.GetMakes(), "MakeId", "Make_Name");
+            vehicle.ModelIds = new SelectList(repository.GetMakeModels().Take(1), "ModelId", "ModelName");
+
             if (ModelState.IsValid)
             {
                 if (vehicle.FileUpload.ContentLength > 0)
@@ -136,39 +161,28 @@ namespace GuildQuest.UI.Controllers
                         }
                     }
                 }
-
                 var tVehicle = new Vehicle()
                 {
-                    BodyStyleID = vehicle.BodyStyleID,
-                    Description = vehicle.Description,
-                    ExteriorColorID = vehicle.ExteriorColorID,
-                    InteriorColorID = vehicle.InteriorColorID,
-                    Mileage = int.Parse(vehicle.Mileage),
-                    MakeModelID = db.MakeModels.FirstOrDefault(m => m.MakeID == vehicle.MakeId && m.ModelID == vehicle.ModelId).MakeModelID,
-                    MSRPrice = Decimal.Parse(vehicle.MSRPrice),
-                    SalesPrice = Decimal.Parse(vehicle.SalesPrice),
-                    TransmissionTypeID = vehicle.TransmissionTypeID,
-                    VINumber = vehicle.VINumber,
+
                     Year = vehicle.Year,
-                    Sold = false,
-                    Featured = false,
+                    MakeModelID = vehicle.MakeModelId,
+                    BodyStyleID = vehicle.BodyStyleID,
+                    TransmissionTypeID = vehicle.TransmissionTypeID,
+                    InteriorColorID = vehicle.InteriorColorID,
+                    ExteriorColorID = vehicle.ExteriorColorID,
+                    Mileage = int.Parse(vehicle.Mileage),
+                    VINumber = vehicle.VINumber,
+                    SalesPrice = decimal.Parse(vehicle.SalesPrice),
+                    MSRPrice = decimal.Parse(vehicle.MSRPrice),
+                    Sold = vehicle.Sold,
+                    Featured = vehicle.Featured,
+                    Description = vehicle.Description,
                     Type = 0
-
                 };
-
-                db.Vehicles.Add(tVehicle);
-                db.SaveChanges();
+                repository.AddVehicle(tVehicle);
 
                 return RedirectToAction("Vehicles");
             }
-
-            ViewBag.BodyStyleID = new SelectList(db.BodyStyles, "BodyStyleID", "BodyStyle1");
-            ViewBag.ExteriorColorID = new SelectList(db.ExteriorColors, "ExteriorColorID", "ExteriorColor1");
-            ViewBag.InteriorColorID = new SelectList(db.InteriorColors, "InteriorColorID", "InteriorColor1");
-            ViewBag.MakeModelID = new SelectList(db.MakeModels, "MakeModelID", "MakeName");
-            ViewBag.TransmissionTypeID = new SelectList(db.TransmissionTypes, "TransmissionTypeID", "TransmissionType1");
-            ViewBag.MakeId = new SelectList(db.Makes.OrderBy(d => d.Make_Name), "MakeId", "Make_Name");
-            ViewBag.ModelId = new SelectList(db.MakeModels.Take(1), "ModelId", "ModelName");
 
             return View(vehicle);
         }
@@ -182,8 +196,8 @@ namespace GuildQuest.UI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            Vehicle vehicle = db.Vehicles.Find(id);
+            
+            Vehicle vehicle = repository.GetVehicleById(id);
             if (vehicle == null)
             {
                 return HttpNotFound();
@@ -213,16 +227,15 @@ namespace GuildQuest.UI.Controllers
                 BodyStyleID = vehicle.BodyStyleID,
                 TransmissionTypeID = vehicle.TransmissionTypeID,
                 InteriorColorID = vehicle.InteriorColorID,
-                ExteriorColorID = vehicle.ExteriorColorID
+                ExteriorColorID = vehicle.ExteriorColorID,
+                BodyStyleIDs = new SelectList(repository.GetBodyStyles(), "BodyStyleID", "BodyStyle1"),
+                ExteriorColorIDs = new SelectList(repository.GetExteriorColors(), "ExteriorColorID", "ExteriorColor1"),
+                InteriorColorIDs = new SelectList(repository.GetInteriorColors(), "InteriorColorID", "InteriorColor1"),
+                MakeModelIDs = new SelectList(repository.GetMakeModels(), "MakeModelID", "MakeName"),
+                TransmissionTypeIDs = new SelectList(repository.GetTransmissionTypes(), "TransmissionTypeID", "TransmissionType1"),
+                MakeIds = new SelectList(repository.GetMakes().OrderBy(d => d.Make_Name), "MakeId", "Make_Name"),
+                ModelIds = new SelectList(repository.GetMakeModels().Where(d => d.MakeID == vehicle.MakeModel.MakeID), "ModelId", "ModelName")
             };
-
-            ViewBag.BodyStyleID = new SelectList(db.BodyStyles, "BodyStyleID", "BodyStyle1");
-            ViewBag.ExteriorColorID = new SelectList(db.ExteriorColors, "ExteriorColorID", "ExteriorColor1");
-            ViewBag.InteriorColorID = new SelectList(db.InteriorColors, "InteriorColorID", "InteriorColor1");
-            ViewBag.MakeModelID = new SelectList(db.MakeModels, "MakeModelID", "MakeName");
-            ViewBag.TransmissionTypeID = new SelectList(db.TransmissionTypes, "TransmissionTypeID", "TransmissionType1");
-            ViewBag.MakeId = new SelectList(db.Makes.OrderBy(d => d.Make_Name), "MakeId", "Make_Name");
-            ViewBag.ModelId = new SelectList(db.MakeModels.Where(d => d.MakeID == vm.MakeId), "ModelId", "ModelName");
 
             return View(vm);
         }
@@ -235,20 +248,42 @@ namespace GuildQuest.UI.Controllers
         [ActionName("EditVehicle")]
         public ActionResult Edit([Bind(Include = "VehicleID,MakeID,ModelID,BodyStyleID,TransmissionTypeID,InteriorColorID,ExteriorColorID,Mileage,VINumber,SalesPrice,MSRPrice,Sold,Featured,Year,Description")] VehicleViewModel vehicle)
         {
+             
+
             if (ModelState.IsValid)
             {
-                db.Entry(vehicle).State = EntityState.Modified;
-                db.SaveChanges();
+                var tVehicle = new Vehicle()
+                {
+
+                    Year = vehicle.Year,
+                    MakeModelID = vehicle.MakeModelId,
+                    BodyStyleID = vehicle.BodyStyleID,
+                    TransmissionTypeID = vehicle.TransmissionTypeID,
+                    InteriorColorID = vehicle.InteriorColorID,
+                    ExteriorColorID = vehicle.ExteriorColorID,
+                    Mileage = int.Parse(vehicle.Mileage),
+                    VINumber = vehicle.VINumber,
+                    SalesPrice = decimal.Parse(vehicle.SalesPrice),
+                    MSRPrice = decimal.Parse(vehicle.MSRPrice),
+                    Sold = vehicle.Sold,
+                    Featured = vehicle.Featured,
+                    Description = vehicle.Description,
+                    Type = 0
+                };
+                repository.EditVehicle(tVehicle);
+
                 return RedirectToAction("Index");
             }
 
-            ViewBag.BodyStyleID = new SelectList(db.BodyStyles, "BodyStyleID", "BodyStyle1");
-            ViewBag.ExteriorColorID = new SelectList(db.ExteriorColors, "ExteriorColorID", "ExteriorColor1");
-            ViewBag.InteriorColorID = new SelectList(db.InteriorColors, "InteriorColorID", "InteriorColor1");
-            ViewBag.MakeModelID = new SelectList(db.MakeModels, "MakeModelID", "MakeName");
-            ViewBag.TransmissionTypeID = new SelectList(db.TransmissionTypes, "TransmissionTypeID", "TransmissionType1");
-            ViewBag.MakeId = new SelectList(db.Makes.OrderBy(d => d.Make_Name), "MakeId", "Make_Name");
-            ViewBag.ModelId = new SelectList(db.MakeModels.Where(d => d.MakeID == vehicle.MakeId), "ModelId", "ModelName");
+
+
+            vehicle.BodyStyleIDs = new SelectList(repository.GetBodyStyles(), "BodyStyleID", "BodyStyle1");
+            vehicle.ExteriorColorIDs = new SelectList(repository.GetExteriorColors(), "ExteriorColorID", "ExteriorColor1");
+            vehicle.InteriorColorIDs = new SelectList(repository.GetInteriorColors(), "InteriorColorID", "InteriorColor1");
+            vehicle.MakeModelIDs = new SelectList(repository.GetMakeModels(), "MakeModelID", "MakeName");
+            vehicle.TransmissionTypeIDs = new SelectList(repository.GetTransmissionTypes(), "TransmissionTypeID", "TransmissionType1");
+            vehicle.MakeIds = new SelectList(repository.GetMakes().OrderBy(d => d.Make_Name), "MakeId", "Make_Name");
+            vehicle.ModelIds = new SelectList(repository.GetMakeModels().Where(d => d.MakeID == vehicle.MakeId), "ModelId", "ModelName");
 
             return View(vehicle);
         }
@@ -261,7 +296,8 @@ namespace GuildQuest.UI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vehicle vehicle = db.Vehicles.Find(id);
+            
+            Vehicle vehicle = repository.GetVehicleById(id);
             if (vehicle == null)
             {
                 return HttpNotFound();
@@ -274,18 +310,14 @@ namespace GuildQuest.UI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Vehicle vehicle = db.Vehicles.Find(id);
-            db.Vehicles.Remove(vehicle);
-            db.SaveChanges();
+           
+            repository.RemoveVehicle(id);
+
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
             base.Dispose(disposing);
         }
     }

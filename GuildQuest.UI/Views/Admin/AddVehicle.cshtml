@@ -48,7 +48,7 @@
                     @Html.LabelFor(model => model.MakeId, "Make", htmlAttributes: new { @class = "form-control-label text-right ml-auto" })
                 </div>
                 <div class="col-6">
-                    @Html.DropDownList("MakeId", null, string.Empty, htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.MakeId, Model.MakeIds, null, htmlAttributes: new { @class = "form-control" })
                 </div>
                 @Html.ValidationMessageFor(model => model.MakeId, "", new { @class = "text-danger" })
             </div>
@@ -59,7 +59,7 @@
                     @Html.LabelFor(model => model.ModelId, "Model", htmlAttributes: new { @class = "form-control-label" })
                 </div>
                 <div class="col-6">
-                    @Html.DropDownList("ModelId", null, string.Empty, htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.ModelId, Model.ModelIds, null, htmlAttributes: new { @class = "form-control" })
                 </div>
                 @Html.ValidationMessageFor(model => model.ModelId, "", new { @class = "text-danger" })
             </div>
@@ -74,7 +74,7 @@
                     @Html.LabelFor(model => model.BodyStyleID, "Body Style", htmlAttributes: new { @class = "form-control-label" })
                 </div>
                 <div class="col-6">
-                    @Html.DropDownList("BodyStyleID", null, string.Empty, htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.BodyStyleID, Model.BodyStyleIDs, null, htmlAttributes: new { @class = "form-control" })
                 </div>
                 @Html.ValidationMessageFor(model => model.BodyStyleID, "", new { @class = "text-danger" })
             </div>
@@ -85,7 +85,7 @@
                     @Html.LabelFor(model => model.TransmissionTypeID, "Transmission Type", htmlAttributes: new { @class = "form-control-label" })
                 </div>
                 <div class="col-6">
-                    @Html.DropDownList("TransmissionTypeID", null, string.Empty, htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.TransmissionTypeID, Model.TransmissionTypeIDs, null, htmlAttributes: new { @class = "form-control" })
                 </div>
                 @Html.ValidationMessageFor(model => model.TransmissionTypeID, "", new { @class = "text-danger" })
             </div>
@@ -99,7 +99,7 @@
                     @Html.LabelFor(model => model.ExteriorColorID, "Exterior Color", htmlAttributes: new { @class = "form-control-label" })
                 </div>
                 <div class="col-6">
-                    @Html.DropDownList("ExteriorColorID", null, string.Empty, htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.ExteriorColorID, Model.ExteriorColorIDs, null, htmlAttributes: new { @class = "form-control" })
                 </div>
                 @Html.ValidationMessageFor(model => model.ExteriorColorID, "", new { @class = "text-danger" })
             </div>
@@ -125,7 +125,7 @@
                     @Html.LabelFor(model => model.InteriorColorID, "Interior Color", htmlAttributes: new { @class = "form-control-label" })
                 </div>
                 <div class="col-6">
-                    @Html.DropDownList("InteriorColorID", null, string.Empty, htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.InteriorColorID, Model.InteriorColorIDs, null, htmlAttributes: new { @class = "form-control" })
                 </div>
                 @Html.ValidationMessageFor(model => model.InteriorColorID, "", new { @class = "text-danger" })
             </div>

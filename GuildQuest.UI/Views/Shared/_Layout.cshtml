@@ -16,8 +16,6 @@
 </head>
 
 <body data-spy="scroll" data-target=".navbar-nav" class="rgba-blue-light">
-    3
-
     <div class="container">
         <nav class="navbar navbar-expand-xl fixed-top  navbar-light teal lighten-4 justify-content-between" id="mainMenu">
 
@@ -58,11 +56,9 @@
                 <ul class="navbar-nav navbar-right">
                     @Html.Partial("_LoginPartial")
                 </ul>
-
             </div>
 
         </nav>
-
     </div>
 
     <div class="container-fluid body-content" style="margin-top: 45px;">
@@ -73,16 +69,14 @@
         </footer>
     </div>
 
-
+</body>
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/jqueryval")
 @Scripts.Render("~/bundles/bootstrap")
 
- 
-@RenderSection("scripts", required: false)
 
-</body>
+@RenderSection("scripts", required: false)
 
 
 </html>

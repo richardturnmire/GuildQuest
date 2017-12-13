@@ -1,5 +1,4 @@
-﻿@using GuildQuest.UI.Models
-@model InventoryViewModel
+﻿@model GuildQuest.UI.Models.InventoryViewModel
 
 @{
     Model.SearchParms.SearchType = ViewBag.SearchType;
@@ -15,15 +14,15 @@
         <div class="my-3 ml-2 row h3">
             <u>
                 @Html.ActionLink(
-                        linkText: "Add a new vehicle",
-                        actionName: "AddVehicle",
-                        controllerName: "Admin",
-                        routeValues: null,
-                        htmlAttributes: new
-                        {
-                            @class = "hm-green-light  "
-                        }
-                        )
+                             linkText: "Add a new vehicle",
+                             actionName: "AddVehicle",
+                             controllerName: "Admin",
+                             routeValues: null,
+                             htmlAttributes: new
+                             {
+                                 @class = "hm-green-light  "
+                             }
+                             )
             </u>
         </div>
 
@@ -39,6 +38,11 @@
 </div>
 @section scripts{
     <script type="text/javascript">
-        Guild.RePager();
+       var pager = new Guild.Pager();
+
+        $(document).ready(function () {
+           pager.showPage(1);
+        });
     </script>
 }
+

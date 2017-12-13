@@ -20,9 +20,13 @@
         @Html.Partial("_InventoryPartial", Model)
 
     </div>
-</div> 
-     @section scripts{
-         <script type="text/javascript">
-             Guild.RePager();
-         </script>
-     }
+</div>
+@section scripts{
+    <script type="text/javascript">
+        var pager = new Guild.Pager();
+
+        $(document).ready(function () {
+            pager.showPage(1);
+        });
+    </script>
+}

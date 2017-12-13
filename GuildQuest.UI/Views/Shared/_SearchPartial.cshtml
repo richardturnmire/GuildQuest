@@ -1,23 +1,21 @@
-﻿@using GuildQuest.UI.Models                                                                                  
-
-
+﻿@using GuildQuest.UI.Models
 @model SearchViewModel
 
 @*Url = "/api/SearchInventory",*@
 <div>
-   @using (Ajax.BeginForm( "SearchInventory", "Inventory", null,
-        new AjaxOptions
-        {
-            HttpMethod = "POST",
+    @using (Ajax.BeginForm("SearchInventory", "Inventory", null,
+         new AjaxOptions
+         {
+             HttpMethod = "POST",
 
-            UpdateTargetId = "inventoryList",
-            InsertionMode = InsertionMode.Replace,
-            OnSuccess = "Guild.RePager()" ,
-            OnComplete = "alert('Completed')"
-        },
-        new { enctype = "multipart/form-data", id = "searchBar", name = "searchBar", @class = " w-100  justify-content-between " }))
+             UpdateTargetId = "inventoryList",
+             InsertionMode = InsertionMode.Replace,
+             OnSuccess = "Guild.RePager()",
+             OnComplete = "alert('Completed')"
+         },
+         new { enctype = "multipart/form-data", id = "searchBar", name = "searchBar", @class = " w-100  justify-content-between " }))
 
-   {
+    {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.SearchType)

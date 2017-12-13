@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Twilio;
 using Twilio.Clients;
 using Twilio.Rest.Api.V2010.Account;
@@ -24,8 +21,8 @@ namespace GuildQuest.UI.Helpers.Twilio
             public RestClient()
             {
                 _client = new global::Twilio.Clients.TwilioRestClient(
-                    Credentials.TwilioAccountSid,
-                    Credentials.TwilioAuthToken
+                    Credentials.AccountSid,
+                    Credentials.AuthToken
                 );
             }
 
@@ -39,7 +36,7 @@ namespace GuildQuest.UI.Helpers.Twilio
                 var result =
                     await MessageResource.CreateAsync(
                         new PhoneNumber(to),
-                        from: new PhoneNumber(Credentials.TwilioPhoneNumber),
+                        from: new PhoneNumber(Credentials.PhoneNumber),
                         body: body,
                         client: _client);
                 return result;
@@ -47,8 +44,6 @@ namespace GuildQuest.UI.Helpers.Twilio
         }
 
     }
-
-
 
     public interface ITwilioMessageSender
     {
@@ -58,7 +53,7 @@ namespace GuildQuest.UI.Helpers.Twilio
     {
         public TwilioMessageSender()
         {
-            TwilioClient.Init(Credentials.TwilioAccountSid, Credentials.TwilioAuthToken);
+            TwilioClient.Init(Credentials.AccountSid, Credentials.AuthToken);
         }
 
         public async Task SendMessageAsync(string to, string from, string body)

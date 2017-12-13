@@ -22,32 +22,5 @@ namespace GuildQuest.UI.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ACcacea2e211f6e2898e81d382d28c3415")]
-        public string Twilio_AccountSID {
-            get {
-                return ((string)(this["Twilio_AccountSID"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2a8844af60dfa744f3da5be748a69f5b")]
-        public string Twilio_AuthToken {
-            get {
-                return ((string)(this["Twilio_AuthToken"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("+15024431419")]
-        public string Twilio_Number {
-            get {
-                return ((string)(this["Twilio_Number"]));
-            }
-        }
     }
 }

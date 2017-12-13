@@ -4,16 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C4730794-69E7-4332-AB27-2EAEE1399FDD}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{51A07ADB-4D24-4D8A-89CF-73E43EA67AA3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GuildQuest.Data</RootNamespace>
     <AssemblyName>GuildQuest.Data</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -33,10 +32,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0-beta1\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0-beta1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -51,14 +50,109 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EF\AspNetRole.cs">
+      <DependentUpon>GuildCarsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\AspNetUser.cs">
+      <DependentUpon>GuildCarsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\AspNetUserClaim.cs">
+      <DependentUpon>GuildCarsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\AspNetUserLogin.cs">
+      <DependentUpon>GuildCarsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\BodyStyle.cs">
+      <DependentUpon>GuildCarsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Contact.cs">
+      <DependentUpon>GuildCarsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\C__MigrationHistory.cs">
+      <DependentUpon>GuildCarsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\ExteriorColor.cs">
+      <DependentUpon>GuildCarsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\GuildCarsModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GuildCarsModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\GuildCarsModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GuildCarsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\GuildCarsModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GuildCarsModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EF\InteriorColor.cs">
+      <DependentUpon>GuildCarsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Make.cs">
+      <DependentUpon>GuildCarsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\MakeModel.cs">
+      <DependentUpon>GuildCarsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Model.cs">
+      <DependentUpon>GuildCarsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\PurchaseType.cs">
+      <DependentUpon>GuildCarsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Sale.cs">
+      <DependentUpon>GuildCarsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Special.cs">
+      <DependentUpon>GuildCarsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\State.cs">
+      <DependentUpon>GuildCarsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\sysdiagram.cs">
+      <DependentUpon>GuildCarsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\TransmissionType.cs">
+      <DependentUpon>GuildCarsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Vehicle.cs">
+      <DependentUpon>GuildCarsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\Enums\VehicleTypeEnum.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\EfRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="EF\GuildCarsModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>GuildCarsModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="EF\GuildCarsModel.edmx.diagram">
+      <DependentUpon>GuildCarsModel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EF\GuildCarsModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GuildCarsModel.edmx</DependentUpon>
+      <LastGenOutput>GuildCarsModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EF\GuildCarsModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GuildCarsModel.edmx</DependentUpon>
+      <LastGenOutput>GuildCarsModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

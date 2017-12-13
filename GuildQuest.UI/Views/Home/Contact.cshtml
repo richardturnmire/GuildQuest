@@ -94,7 +94,15 @@
 </div>
 
 @section Scripts {
-
+    <script type="text/javascript" src="~/Scripts/GoogleKeys.js"></script>  
+    <script>
+        var mykey = 'https://maps.googleapis.com/maps/api/js?key='.concat(config.MAP_KEY).concat('&callback=initMap');
+        var script = document.createElement('script');
+        script.src = mykey;
+        script.async = true;
+        script.defer = true;
+        document.body.appendChild(script);
+    </script>
     <script>
         function initMap() {
             var guild = { lat: 38.2539326, lng: -85.7485225 };
@@ -119,7 +127,6 @@
         }
 
     </script>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8iKImK2HWvzu_EVjO48a0m6t3qXuLW80&callback=initMap">
-    </script>
+
+   
 }

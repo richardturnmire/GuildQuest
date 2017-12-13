@@ -1,8 +1,9 @@
-﻿@using GuildQuest.UI.Models
+﻿@using GuildQuest.Data.EF
+@using GuildQuest.UI.Models
 @model MainPageViewModel
 @{
-            var activeSw = "class='active'";
-            var activeSw2 = "active";
+    var activeSw = "class='active'";
+    var activeSw2 = "active";
 }
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 
@@ -16,12 +17,12 @@
 
     <div class="carousel-inner">
         @foreach (Special special in Model.Specials)
-            {
+        {
             <div class="carousel-item @activeSw2">
                 <div class="container">
-                    <div class="carousel-caption d-none d-md-block">  
+                    <div class="carousel-caption d-none d-md-block">
                         <p>
-                        <h3>@special.Special_Title</h3>    
+                            <h3>@special.Special_Title</h3>
                         </p>
                         <p>@special.Special_Description</p>
                     </div>

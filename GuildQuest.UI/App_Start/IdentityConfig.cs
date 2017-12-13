@@ -5,13 +5,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using System;
-using System.Configuration;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Twilio;
- 
-using Twilio.Rest.Api.V2010.Account;
-using Twilio.Types;
 using GuildQuest.UI.Helpers.Twilio;
 
 namespace GuildQuest.UI
@@ -39,7 +34,7 @@ namespace GuildQuest.UI
         public async Task SendAsync(IdentityMessage message)
         {
              await _messageSender.SendMessageAsync(message.Destination,
-                Credentials.TwilioPhoneNumber,
+                Credentials.PhoneNumber,
                 message.Body);
             
         }

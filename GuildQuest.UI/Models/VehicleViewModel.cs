@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Web;
 using System.Web.Mvc;
 
@@ -36,6 +33,18 @@ namespace GuildQuest.UI.Models
         public int TransmissionTypeID { get; set; }
         public int InteriorColorID { get; set; }
         public int ExteriorColorID { get; set; }
+
+        public SelectList BodyStyleIDs { get; set; }
+        public SelectList ExteriorColorIDs { get; set; }
+        public SelectList InteriorColorIDs { get; set; }
+        public SelectList MakeModelIDs { get; set; }
+        public SelectList TransmissionTypeIDs { get; set; }
+        public SelectList MakeIds { get; set; }
+        public SelectList ModelIds { get; set; }
+        public SelectList StateIds { get; set; }
+        public SelectList PurchaseTypeIds { get; set; }
+
+
 
     }
 }

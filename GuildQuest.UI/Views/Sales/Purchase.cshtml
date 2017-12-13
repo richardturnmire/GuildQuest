@@ -5,11 +5,12 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-horizontal">
             <h5 class="display-1">Sales Information</h5>
             <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.)
             <div class="row">
                 <div class="form-group col-md-4">
                     @Html.LabelFor(model => model.SaleInfo.Name, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -26,17 +27,17 @@
                         @Html.ValidationMessageFor(model => model.SaleInfo.Phone, "", new { @class = "text-danger" })
                     </div>
                 </div>
-            </div> 
-            
-            <div class="row">   
+            </div>
+
+            <div class="row">
                 <div class="form-group col-md-4">
                     @Html.LabelFor(model => model.SaleInfo.Email, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.SaleInfo.Email, new { htmlAttributes = new { @class = "form-control control-lg" } })
                         @Html.ValidationMessageFor(model => model.SaleInfo.Email, "", new { @class = "text-danger" })
                     </div>
-                </div>   
-            </div> 
+                </div>
+            </div>
 
             <div class="row">
                 <div class="form-group col-md-4">
@@ -54,7 +55,7 @@
                         @Html.ValidationMessageFor(model => model.SaleInfo.Street2, "", new { @class = "text-danger" })
                     </div>
                 </div>
-            </div> 
+            </div>
 
             <div class="row">
                 <div class="form-group col-md-4">
@@ -67,12 +68,15 @@
 
                 <div class="form-group col-md-4">
                     @Html.LabelFor(model => model.SaleInfo.StateId, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-3">
-                        @Html.DropDownList("StateId", null, string.Empty, htmlAttributes: new { @class = "form-control control-lg" })
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.SaleInfo.StateId, ViewBag.StateId as IEnumerable<SelectListItem>,  htmlAttributes: new { @class = "form-control   " })
+
+
+                        @*@Html.DropDownList("StateId", null, string.Empty, htmlAttributes: new { @class = "form-control control-lg" })*@
                         @Html.ValidationMessageFor(model => model.SaleInfo.StateId, "", new { @class = "text-danger" })
                     </div>
                 </div>
-            </div>  
+            </div>
 
             <div class="row">
                 <div class="form-group col-md-4">
@@ -82,7 +86,7 @@
                         @Html.ValidationMessageFor(model => model.SaleInfo.ZipCode, "", new { @class = "text-danger" })
                     </div>
                 </div>
-            </div> 
+            </div>
 
             <div class="row">
                 <div class="form-group col-md-4">
@@ -96,18 +100,19 @@
                 <div class="form-group col-md-4 ">
                     @Html.LabelFor(model => model.SaleInfo.PurchaseTypeId, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-5">
-                        @Html.DropDownList("PurchaseTypeId", null, string.Empty, htmlAttributes: new { @class = "form-control   " })
-                        @Html.ValidationMessageFor(model => model.SaleInfo.PurchaseTypeId, "", new { @class = "text-danger" })
+                        @Html.DropDownListFor(model => model.SaleInfo.PurchaseTypeId, ViewBag.PurchaseTypeId as IEnumerable<SelectListItem>,  htmlAttributes: new { @class = "form-control   " })
+                            @*@Html.DropDownList("PurchaseTypeId", null, string.Empty, htmlAttributes: new { @class = "form-control   " })*@
+                            @Html.ValidationMessageFor(model => model.SaleInfo.PurchaseTypeId, "", new { @class = "text-danger" })
                     </div>
                 </div>
-            </div>  
-            
+            </div>
+
             <div class="row">
-                <div class="form-group col-md-4">  
+                <div class="form-group col-md-4">
                     <div class="col-md-10">
-                        <input type="submit" value="Save" class="btn btn-default" />   
+                        <input type="submit" value="Save" class="btn btn-default" />
                     </div>
-               </div>
+                </div>
             </div>
         </div>
     }

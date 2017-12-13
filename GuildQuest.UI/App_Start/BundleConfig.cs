@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace GuildQuest.UI
 {
@@ -29,9 +28,9 @@ namespace GuildQuest.UI
                     ));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                    "~/Scripts/popper.min.js",
                     "~/Scripts/bootstrap.min.js",
                     "~/Scripts/mdb.min.js",
-                    "~/Scripts/popper.min.js",
                     "~/Scripts/respond*",
                     "~/Scripts/Guild_Script.js"
                      ));
